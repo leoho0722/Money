@@ -9,12 +9,15 @@ import SwiftUI
 
 struct SettingsForegroundStyleView: View {
     
+    /// 使用者選擇的 App 主題顏色
     @State var selectedThemeColor: Color
     
+    /// 使用者選擇的 App 外觀顏色
     @State var selectedForegroundStyle: AppForegroundStyle
     
     var body: some View {
         List {
+            // MARK: - Section 1 App 外觀
             Section {
                 Picker(transalte(key: .Appearance), selection: $selectedForegroundStyle) {
                     ForEach(AppForegroundStyle.allCases) { style in
@@ -40,6 +43,7 @@ struct SettingsForegroundStyleView: View {
                 Text(transalte(key: .App_appearance_will_change_the_next_time_you_open_it))
             }
             
+            // MARK: - Section 1 App 主題顏色
             Section {
                 ColorPicker(transalte(key: .AppThemeColor), selection: $selectedThemeColor)
                     .onChange(of: selectedThemeColor) { newValue in
@@ -53,10 +57,12 @@ struct SettingsForegroundStyleView: View {
             } footer: {
                 Text(transalte(key: .App_theme_color_will_change_the_next_time_you_open_it))
             }
-        }.onAppear(perform: {
+        }
+        // MARK: - onAppear 畫面一出現的時候，要做的事
+        .onAppear(perform: {
             setup()
         })
-        .navigationTitle(transalte(key: .Appearance))
+        .navigationTitle(transalte(key: .Appearance)) // 設定 NavigationBar title
     }
     
     func setup() {

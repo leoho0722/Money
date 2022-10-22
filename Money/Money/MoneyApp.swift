@@ -13,7 +13,7 @@ struct MoneyApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView(themeColor: AppStorageManager.shared.themeColor)
+            ContentView()
                 .environment(\.colorScheme, AppStorageManager.shared.isEnableDarkMode ? .dark : .light)
         }
     }
