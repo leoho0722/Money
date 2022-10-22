@@ -22,6 +22,15 @@
 "New Record" = "New Record";
 "Settings" = "Settings";
 
+// MARK: - AddNewRecordView
+
+"Record Type" = "Record Type";
+"Today" = "Today";
+"Price" = "Price";
+"Enter amount" = "Enter amount";
+"Expenditure" = "Expenditure";
+"Income" = "Income";
+
 // MARK: - SettingsView
 
 "Dark" = "Dark";

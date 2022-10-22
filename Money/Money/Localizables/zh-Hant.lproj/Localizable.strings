@@ -22,6 +22,15 @@
 "New Record" = "新增";
 "Settings" = "設定";
 
+// MARK: - AddNewRecordView
+
+"Record Type" = "種類";
+"Today" = "今天日期";
+"Price" = "金額";
+"Enter amount" = "輸入金額";
+"Expenditure" = "支出";
+"Income" = "收入";
+
 // MARK: - SettingsView
 
 "Dark" = "深色";

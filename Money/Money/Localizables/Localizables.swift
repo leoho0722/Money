@@ -27,6 +27,15 @@ enum LocalizationKeys: String {
     
     case Settings = "Settings"
     
+    // MARK: - AddNewRecordView
+    
+    case RecordType = "Record Type"
+    case Today = "Today"
+    case Price = "Price"
+    case EnterAmount = "Enter amount"
+    case Expenditure = "Expenditure"
+    case Income = "Income"
+    
     // MARK: - SettingsView
     
     case Dark = "Dark"
