@@ -17,7 +17,7 @@ enum LocalizationKeys: String {
     
     // SettingsForegroundStyleView
     case App_appearance_will_change_the_next_time_you_open_it = "App appearance will change the next time you open it."
-    case App_theme_color_will_change_the_next_time_you_open_it = "App appearance will change the next time you open it"
+    case App_theme_color_will_change_the_next_time_you_open_it = "App theme color will change the next time you open it"
     
     // MARK: - TabView
     
