@@ -1,0 +1,32 @@
+/* 
+  Localizable.strings
+  Money
+
+  Created by Leo Ho on 2022/10/22.
+  
+*/
+
+// MARK: - Alert
+
+"Close" = "關閉";
+
+// MARK: - Alert Message
+
+// SettingsForegroundStyleView
+"App appearance will change the next time you open it." = "App 外觀將於下次開啟時變更。";
+"App theme color will change the next time you open it." = "App 主題顏色將於下次開啟時變更。";
+
+// MARK: - TabView
+
+"Money Book" = "帳本";
+"New Record" = "新增";
+"Settings" = "設定";
+
+// MARK: - SettingsView
+
+"Dark" = "深色";
+"Light" = "淺色";
+"Appearance" = "外觀";
+"App Appearance" = "App 外觀";
+"App Theme" = "App 主題";
+"App Theme Color" = "App 主題顏色";
