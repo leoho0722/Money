@@ -17,7 +17,11 @@ extension Color: RawRepresentable {
         }
         
         do {
+            #if os(iOS)
             let color = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? UIColor ?? .black
+            #elseif os(macOS)
+            let color = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? NSColor ?? .black
+            #endif
             self = Color(color)
         } catch {
             self = .black
@@ -27,7 +31,11 @@ extension Color: RawRepresentable {
     public var rawValue: String {
         
         do {
+            #if os(iOS)
             let data = try NSKeyedArchiver.archivedData(withRootObject: UIColor(self), requiringSecureCoding: false) as Data
+            #elseif os(macOS)
+            let data = try NSKeyedArchiver.archivedData(withRootObject: NSColor(self), requiringSecureCoding: false) as Data
+            #endif
             return data.base64EncodedString()
         } catch {
             return ""

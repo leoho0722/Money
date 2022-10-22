@@ -24,7 +24,11 @@ struct SettingsForegroundStyleView: View {
                         Text(transalte(key: LocalizationKeys(rawValue: style.rawValue)!))
                     }
                 }
+                #if os(iOS)
                 .pickerStyle(.navigationLink)
+                #elseif os(macOS)
+                .pickerStyle(.radioGroup)
+                #endif
                 .onChange(of: selectedForegroundStyle) { newValue in
                     if newValue.rawValue != AppStorageManager.shared.foregroundStyle {
                         print("外觀選擇使用 \(newValue.rawValue) 模式")
