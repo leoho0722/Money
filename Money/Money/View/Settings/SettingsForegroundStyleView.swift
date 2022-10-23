@@ -30,8 +30,8 @@ struct SettingsForegroundStyleView: View {
                 .pickerStyle(.radioGroup)
                 #endif
                 .onChange(of: selectedForegroundStyle) { newValue in
+                    print("外觀選擇使用 \(newValue.rawValue) 模式")
                     if newValue.rawValue != AppStorageManager.shared.foregroundStyle {
-                        print("外觀選擇使用 \(newValue.rawValue) 模式")
                         AppStorageManager.shared.foregroundStyle = newValue.rawValue
                         switch newValue {
                         case .dark:
@@ -51,8 +51,8 @@ struct SettingsForegroundStyleView: View {
             Section {
                 ColorPicker(transalte(key: .AppThemeColor), selection: $selectedThemeColor)
                     .onChange(of: selectedThemeColor) { newValue in
+                        print("主題顏色選擇使用 \(newValue)")
                         if newValue != AppStorageManager.shared.themeColor {
-                            print("主題顏色選擇使用 \(newValue)")
                             AppStorageManager.shared.themeColor = newValue
                         }
                     }
@@ -71,10 +71,10 @@ struct SettingsForegroundStyleView: View {
     
     func setup() {
         switch AppStorageManager.shared.foregroundStyle {
-        case transalte(key: .Dark):
+        case "Dark":
             selectedForegroundStyle = .dark
             AppStorageManager.shared.isEnableDarkMode = true
-        case transalte(key: .Light):
+        case "Light":
             selectedForegroundStyle = .light
             AppStorageManager.shared.isEnableDarkMode = false
         default:
