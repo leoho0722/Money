@@ -16,6 +16,10 @@
 "App appearance will change the next time you open it." = "App appearance will change the next time you open it.";
 "App theme color will change the next time you open it." = "App theme color will change the next time you open it.";
 
+// AddNewRecordView
+"Amount has not been entered." = "Amount has not been entered.";
+"Save Succeed." = "Save Succeed.";
+
 // MARK: - TabView
 
 "Money Book" = "Money Book";
@@ -30,6 +34,18 @@
 "Enter amount" = "Enter amount";
 "Expenditure" = "Expenditure";
 "Income" = "Income";
+"Category" = "Category";
+"Account" = "Account";
+"Notes Something..." = "Notes Something...";
+"Meals" = "Meals";
+"Traffic" = "Traffic";
+"Entertainment" = "Entertainment";
+"Telecom Charges" = "Telecom Charges";
+"Water Bill" = "Water Bill";
+"Gas Fee" = "Gas Fee";
+"Cash" = "Cash";
+"Bank" = "Bank";
+"Credit Card" = "Credit Card";
 
 // MARK: - SettingsView
 

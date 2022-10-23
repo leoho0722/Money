@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D037B95629043B83006550C4 /* AddNewRecordRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D037B95529043B83006550C4 /* AddNewRecordRow.swift */; };
+		D01132D229056627005EE076 /* AddNewRecordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01132D129056627005EE076 /* AddNewRecordViewModel.swift */; };
+		D01132D4290567D1005EE076 /* Records.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01132D3290567D1005EE076 /* Records.swift */; };
+		D037B95629043B83006550C4 /* AddNewRecordTextFieldRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D037B95529043B83006550C4 /* AddNewRecordTextFieldRow.swift */; };
 		D0A60A5C290395C90075A170 /* MoneyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A60A5B290395C90075A170 /* MoneyApp.swift */; };
 		D0A60A5E290395C90075A170 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A60A5D290395C90075A170 /* ContentView.swift */; };
 		D0A60A60290395CB0075A170 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0A60A5F290395CB0075A170 /* Assets.xcassets */; };
@@ -47,7 +49,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		D037B95529043B83006550C4 /* AddNewRecordRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewRecordRow.swift; sourceTree = "<group>"; };
+		D01132D129056627005EE076 /* AddNewRecordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewRecordViewModel.swift; sourceTree = "<group>"; };
+		D01132D3290567D1005EE076 /* Records.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Records.swift; sourceTree = "<group>"; };
+		D037B95529043B83006550C4 /* AddNewRecordTextFieldRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewRecordTextFieldRow.swift; sourceTree = "<group>"; };
 		D0A60A58290395C90075A170 /* Money.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Money.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0A60A5B290395C90075A170 /* MoneyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyApp.swift; sourceTree = "<group>"; };
 		D0A60A5D290395C90075A170 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -110,7 +114,7 @@
 		D037B95429043B4B006550C4 /* Compnents */ = {
 			isa = PBXGroup;
 			children = (
-				D037B95529043B83006550C4 /* AddNewRecordRow.swift */,
+				D037B95529043B83006550C4 /* AddNewRecordTextFieldRow.swift */,
 			);
 			path = Compnents;
 			sourceTree = "<group>";
@@ -180,6 +184,7 @@
 			isa = PBXGroup;
 			children = (
 				D0A60A942903BCB60075A170 /* SettingsViewModel.swift */,
+				D01132D129056627005EE076 /* AddNewRecordViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -199,6 +204,7 @@
 			isa = PBXGroup;
 			children = (
 				D0A60A922903BC510075A170 /* Settings.swift */,
+				D01132D3290567D1005EE076 /* Records.swift */,
 				D0A60A9D2903D2210075A170 /* AppSettings.swift */,
 				D0A60A9F2903D3920075A170 /* AppStorageManager.swift */,
 			);
@@ -385,7 +391,9 @@
 				D0A60A8D2903BA780075A170 /* SettingsView.swift in Sources */,
 				D0A60AA02903D3920075A170 /* AppStorageManager.swift in Sources */,
 				D0A60A9C2903C6710075A170 /* SettingsForegroundStyleView.swift in Sources */,
-				D037B95629043B83006550C4 /* AddNewRecordRow.swift in Sources */,
+				D01132D4290567D1005EE076 /* Records.swift in Sources */,
+				D01132D229056627005EE076 /* AddNewRecordViewModel.swift in Sources */,
+				D037B95629043B83006550C4 /* AddNewRecordTextFieldRow.swift in Sources */,
 				D0A60A5E290395C90075A170 /* ContentView.swift in Sources */,
 				D0A60A8F2903BB080075A170 /* AddNewRecordView.swift in Sources */,
 				D0A60A5C290395C90075A170 /* MoneyApp.swift in Sources */,

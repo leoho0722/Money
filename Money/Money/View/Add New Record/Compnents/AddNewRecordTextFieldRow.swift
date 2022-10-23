@@ -1,5 +1,5 @@
 //
-//  AddNewRecordRow.swift
+//  AddNewRecordTextFieldRow.swift
 //  Money
 //
 //  Created by Leo Ho on 2022/10/22.
@@ -8,7 +8,7 @@
 import SwiftUI
 import Combine
 
-struct AddNewRecordRow: View {
+struct AddNewRecordTextFieldRow: View {
     
     @Binding var text: String
     

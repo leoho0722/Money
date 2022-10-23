@@ -19,6 +19,10 @@ enum LocalizationKeys: String {
     case App_appearance_will_change_the_next_time_you_open_it = "App appearance will change the next time you open it."
     case App_theme_color_will_change_the_next_time_you_open_it = "App theme color will change the next time you open it"
     
+    // AddNewRecordView
+    case AmountHasNotBeenEntered = "Amount has not been entered."
+    case SaveSucceed = "Save Succeed."
+    
     // MARK: - TabView
     
     case MoneyBook = "Money Book"
@@ -35,6 +39,18 @@ enum LocalizationKeys: String {
     case EnterAmount = "Enter amount"
     case Expenditure = "Expenditure"
     case Income = "Income"
+    case Category = "Category"
+    case Account = "Account"
+    case NotesSomething = "Notes Something..."
+    case Meals = "Meals"
+    case Traffic = "Traffic"
+    case Entertainment = "Entertainment"
+    case TelecomCharges = "Telecom Charges"
+    case WaterBill = "Water Bill"
+    case GasFee = "Gas Fee"
+    case Cash = "Cash"
+    case Bank = "Bank"
+    case CreditCard = "Credit Card"
     
     // MARK: - SettingsView
     

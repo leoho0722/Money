@@ -16,6 +16,10 @@
 "App appearance will change the next time you open it." = "App 外觀將於下次開啟時變更。";
 "App theme color will change the next time you open it." = "App 主題顏色將於下次開啟時變更。";
 
+// AddNewRecordView
+"Amount has not been entered." = "金額尚未輸入。";
+"Save Succeed." = "儲存成功。";
+
 // MARK: - TabView
 
 "Money Book" = "帳本";
@@ -24,12 +28,24 @@
 
 // MARK: - AddNewRecordView
 
-"Record Type" = "種類";
+"Record Type" = "記帳類型";
 "Today" = "今天日期";
 "Price" = "金額";
 "Enter amount" = "輸入金額";
 "Expenditure" = "支出";
 "Income" = "收入";
+"Category" = "類別";
+"Account" = "帳戶";
+"Notes Something..." = "記錄點東西吧...";
+"Meals" = "三餐";
+"Traffic" = "交通";
+"Entertainment" = "娛樂";
+"Telecom Charges" = "電信費";
+"Water Bill" = "水費";
+"Gas Fee" = "瓦斯費";
+"Cash" = "現金";
+"Bank" = "銀行";
+"Credit Card" = "信用卡";
 
 // MARK: - SettingsView
 
