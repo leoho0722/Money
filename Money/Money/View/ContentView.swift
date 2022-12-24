@@ -10,24 +10,24 @@ import SwiftUI
 struct ContentView: View {
     
     /// App 主題顏色，根據使用者選擇的顏色來變動
-    @State var themeColor: Color = AppStorageManager.shared.themeColor
+    @State private var themeColor: Color = AppStorageManager.shared.themeColor
 
     var body: some View {
         TabView {
             // MARK: - 帳本頁面
             MoneyBookView()
                 .tabItem {
-                    Label(transalte(key: .MoneyBook), systemImage: "square.and.pencil")
+                    Label(transalte(key: .MoneyBook), sfSymbols: .edit)
                 }
             // MARK: - 記帳頁面
-            AddNewRecordView()
-                .tabItem {
-                    Label(transalte(key: .NewRecord), systemImage: "plus")
-                }
+//            AddNewRecordView()
+//                .tabItem {
+//                    Label(transalte(key: .NewRecord), sfSymbols: .plus)
+//                }
             // MARK: - 設定頁面
             SettingsView()
                 .tabItem {
-                    Label(transalte(key: .Settings), systemImage: "gear")
+                    Label(transalte(key: .Settings), sfSymbols: .settings)
                 }
         }
         .tint(themeColor) // 設定 App 主題顏色

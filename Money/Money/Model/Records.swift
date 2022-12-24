@@ -7,9 +7,10 @@
 
 import SwiftUI
 
+/// 新增記帳時的畫面結構
 struct Records: Identifiable, Hashable {
     
-    var id = UUID().uuidString
+    var id = UUID()
     
     var name: String
     

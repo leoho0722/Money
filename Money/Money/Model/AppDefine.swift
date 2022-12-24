@@ -17,3 +17,16 @@ enum AppForegroundStyle: String, CaseIterable, Identifiable {
     
     var id: Self { self }
 }
+
+enum SFSymbols: String {
+    
+    case edit = "square.and.pencil"
+    
+    case plus = "plus"
+    
+    case settings = "gear"
+    
+    case menucard = "menucard.fill"
+    
+    case dollar = "dollarsign.circle"
+}

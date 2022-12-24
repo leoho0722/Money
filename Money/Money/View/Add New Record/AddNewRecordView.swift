@@ -10,25 +10,25 @@ import SwiftUI
 struct AddNewRecordView: View {
     
     /// 使用者選擇的記帳類型 Index
-    @State var selectedIndex: Int = 0
+    @State private var selectedIndex: Int = 0
     
     /// 使用者選擇的日期
-    @State var selectedDate: Date = .now
+    @State private var selectedDate: Date = .now
     
     /// 使用者輸入的金額
-    @State var inputText: String = ""
+    @State private var inputText: String = ""
     
     /// 使用者輸入的補充內容
-    @State var inputNotes: String = ""
+    @State private var inputNotes: String = ""
     
     /// 使用者選擇的類別 Index
-    @State var selectedCategory: Int = 0
+    @State private var selectedCategory: Int = 0
     
     /// 使用者選擇的帳戶 Index
-    @State var selectedAccount: Int = 0
+    @State private var selectedAccount: Int = 0
     
     /// 是否顯示 Alert
-    @State var isPresented: Bool = false
+    @State private var isPresented: Bool = false
     
     /// Alert 要顯示的 Title
     private var alertTitle: String {
@@ -72,7 +72,7 @@ struct AddNewRecordView: View {
                 
                 // MARK: - 類別 Menu
                 HStack {
-                    Image(systemName: "menucard.fill")
+                    Image(sfSymbols: .menucard)
                     Spacer()
                     Picker(transalte(key: .Category), selection: $selectedCategory) {
                         ForEach(viewModel.categoryList) { category in
@@ -87,7 +87,7 @@ struct AddNewRecordView: View {
                 
                 // MARK: - 帳戶 Menu
                 HStack {
-                    Image(systemName: "dollarsign.circle")
+                    Image(sfSymbols: .dollar)
                     Spacer()
                     Picker(transalte(key: .Account), selection: $selectedAccount) {
                         ForEach(viewModel.accountList) { account in
@@ -126,12 +126,13 @@ struct AddNewRecordView: View {
                         
                         print("記帳類型：\(viewModel.recordTypeList[selectedIndex].name)")
                         print("記帳日期：\(selectedDate)")
+                        print("記帳日期 (時間戳)：\(selectedDate.timeIntervalSince1970)")
                         print("金額：\(inputText)")
                         print("類別：\(viewModel.categoryList[selectedCategory].name)")
                         print("帳戶：\(viewModel.accountList[selectedAccount].name)")
                         print("補充內容：\(inputNotes)\n")
                     } label: {
-                        Image(systemName: "plus")
+                        Image(sfSymbols: .plus)
                     }
                     .alert(Text(alertTitle), isPresented: $isPresented) {
                         Button(transalte(key: .Close)) {
@@ -154,6 +155,7 @@ struct AddNewRecordView_Previews: PreviewProvider {
  參考來源：https://stackoverflow.com/questions/56491386/how-to-hide-keyboard-when-using-swiftui
  */
 struct CloseKeyboard: ViewModifier {
+    
     func body(content: Content) -> some View {
         content
             .onTapGesture {

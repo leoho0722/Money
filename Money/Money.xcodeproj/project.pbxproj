@@ -10,6 +10,11 @@
 		D01132D229056627005EE076 /* AddNewRecordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01132D129056627005EE076 /* AddNewRecordViewModel.swift */; };
 		D01132D4290567D1005EE076 /* Records.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01132D3290567D1005EE076 /* Records.swift */; };
 		D037B95629043B83006550C4 /* AddNewRecordTextFieldRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D037B95529043B83006550C4 /* AddNewRecordTextFieldRow.swift */; };
+		D0A0B2802955FDFA00639A91 /* Image+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0B27F2955FDFA00639A91 /* Image+Extensions.swift */; };
+		D0A0B2822955FE9F00639A91 /* Label+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0B2812955FE9F00639A91 /* Label+Extensions.swift */; };
+		D0A0B284295604EB00639A91 /* Money.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0B283295604EB00639A91 /* Money.swift */; };
+		D0A0B2872956068900639A91 /* MoneyBookViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0B2862956068900639A91 /* MoneyBookViewModel.swift */; };
+		D0A0B2892957389D00639A91 /* AppUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A0B2882957389D00639A91 /* AppUtility.swift */; };
 		D0A60A5C290395C90075A170 /* MoneyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A60A5B290395C90075A170 /* MoneyApp.swift */; };
 		D0A60A5E290395C90075A170 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A60A5D290395C90075A170 /* ContentView.swift */; };
 		D0A60A60290395CB0075A170 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0A60A5F290395CB0075A170 /* Assets.xcassets */; };
@@ -24,7 +29,7 @@
 		D0A60A952903BCB60075A170 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A60A942903BCB60075A170 /* SettingsViewModel.swift */; };
 		D0A60A9A2903C4540075A170 /* SettingsRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A60A992903C4540075A170 /* SettingsRow.swift */; };
 		D0A60A9C2903C6710075A170 /* SettingsForegroundStyleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A60A9B2903C6710075A170 /* SettingsForegroundStyleView.swift */; };
-		D0A60A9E2903D2210075A170 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A60A9D2903D2210075A170 /* AppSettings.swift */; };
+		D0A60A9E2903D2210075A170 /* AppDefine.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A60A9D2903D2210075A170 /* AppDefine.swift */; };
 		D0A60AA02903D3920075A170 /* AppStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A60A9F2903D3920075A170 /* AppStorageManager.swift */; };
 		D0A60AA32903DA440075A170 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A60AA22903DA440075A170 /* Color+Extensions.swift */; };
 		D0A60AA72903EA380075A170 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D0A60AA92903EA380075A170 /* Localizable.strings */; };
@@ -52,6 +57,11 @@
 		D01132D129056627005EE076 /* AddNewRecordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewRecordViewModel.swift; sourceTree = "<group>"; };
 		D01132D3290567D1005EE076 /* Records.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Records.swift; sourceTree = "<group>"; };
 		D037B95529043B83006550C4 /* AddNewRecordTextFieldRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewRecordTextFieldRow.swift; sourceTree = "<group>"; };
+		D0A0B27F2955FDFA00639A91 /* Image+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+Extensions.swift"; sourceTree = "<group>"; };
+		D0A0B2812955FE9F00639A91 /* Label+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Label+Extensions.swift"; sourceTree = "<group>"; };
+		D0A0B283295604EB00639A91 /* Money.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Money.swift; sourceTree = "<group>"; };
+		D0A0B2862956068900639A91 /* MoneyBookViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyBookViewModel.swift; sourceTree = "<group>"; };
+		D0A0B2882957389D00639A91 /* AppUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUtility.swift; sourceTree = "<group>"; };
 		D0A60A58290395C90075A170 /* Money.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Money.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0A60A5B290395C90075A170 /* MoneyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyApp.swift; sourceTree = "<group>"; };
 		D0A60A5D290395C90075A170 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -70,7 +80,7 @@
 		D0A60A942903BCB60075A170 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		D0A60A992903C4540075A170 /* SettingsRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRow.swift; sourceTree = "<group>"; };
 		D0A60A9B2903C6710075A170 /* SettingsForegroundStyleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsForegroundStyleView.swift; sourceTree = "<group>"; };
-		D0A60A9D2903D2210075A170 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
+		D0A60A9D2903D2210075A170 /* AppDefine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDefine.swift; sourceTree = "<group>"; };
 		D0A60A9F2903D3920075A170 /* AppStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStorageManager.swift; sourceTree = "<group>"; };
 		D0A60AA22903DA440075A170 /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
 		D0A60AA82903EA380075A170 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -119,6 +129,23 @@
 			path = Compnents;
 			sourceTree = "<group>";
 		};
+		D0A0B27E2955FCBF00639A91 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D0A60A5F290395CB0075A170 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		D0A0B2852956051A00639A91 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				D0A60A9F2903D3920075A170 /* AppStorageManager.swift */,
+				D0A0B2882957389D00639A91 /* AppUtility.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 		D0A60A4F290395C90075A170 = {
 			isa = PBXGroup;
 			children = (
@@ -142,14 +169,14 @@
 		D0A60A5A290395C90075A170 /* Money */ = {
 			isa = PBXGroup;
 			children = (
+				D0A60A5B290395C90075A170 /* MoneyApp.swift */,
+				D0A60A61290395CB0075A170 /* Money.entitlements */,
 				D0A60AA12903DA2F0075A170 /* Extensions */,
 				D0A60A88290396390075A170 /* Model */,
 				D0A60A87290396330075A170 /* View */,
 				D0A60A86290396240075A170 /* ViewModels */,
 				D0A60AA42903EA070075A170 /* Localizables */,
-				D0A60A5B290395C90075A170 /* MoneyApp.swift */,
-				D0A60A5F290395CB0075A170 /* Assets.xcassets */,
-				D0A60A61290395CB0075A170 /* Money.entitlements */,
+				D0A0B27E2955FCBF00639A91 /* Resources */,
 				D0A60A62290395CB0075A170 /* Preview Content */,
 			);
 			path = Money;
@@ -183,8 +210,9 @@
 		D0A60A86290396240075A170 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				D0A60A942903BCB60075A170 /* SettingsViewModel.swift */,
+				D0A0B2862956068900639A91 /* MoneyBookViewModel.swift */,
 				D01132D129056627005EE076 /* AddNewRecordViewModel.swift */,
+				D0A60A942903BCB60075A170 /* SettingsViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -203,10 +231,11 @@
 		D0A60A88290396390075A170 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				D0A60A922903BC510075A170 /* Settings.swift */,
+				D0A0B283295604EB00639A91 /* Money.swift */,
 				D01132D3290567D1005EE076 /* Records.swift */,
-				D0A60A9D2903D2210075A170 /* AppSettings.swift */,
-				D0A60A9F2903D3920075A170 /* AppStorageManager.swift */,
+				D0A60A922903BC510075A170 /* Settings.swift */,
+				D0A60A9D2903D2210075A170 /* AppDefine.swift */,
+				D0A0B2852956051A00639A91 /* Utilities */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -242,6 +271,8 @@
 			isa = PBXGroup;
 			children = (
 				D0A60AA22903DA440075A170 /* Color+Extensions.swift */,
+				D0A0B27F2955FDFA00639A91 /* Image+Extensions.swift */,
+				D0A0B2812955FE9F00639A91 /* Label+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -393,15 +424,20 @@
 				D0A60A9C2903C6710075A170 /* SettingsForegroundStyleView.swift in Sources */,
 				D01132D4290567D1005EE076 /* Records.swift in Sources */,
 				D01132D229056627005EE076 /* AddNewRecordViewModel.swift in Sources */,
+				D0A0B2822955FE9F00639A91 /* Label+Extensions.swift in Sources */,
 				D037B95629043B83006550C4 /* AddNewRecordTextFieldRow.swift in Sources */,
 				D0A60A5E290395C90075A170 /* ContentView.swift in Sources */,
 				D0A60A8F2903BB080075A170 /* AddNewRecordView.swift in Sources */,
 				D0A60A5C290395C90075A170 /* MoneyApp.swift in Sources */,
 				D0A60AAC2903EAA30075A170 /* Localizables.swift in Sources */,
 				D0A60AA32903DA440075A170 /* Color+Extensions.swift in Sources */,
+				D0A0B284295604EB00639A91 /* Money.swift in Sources */,
+				D0A0B2892957389D00639A91 /* AppUtility.swift in Sources */,
+				D0A0B2872956068900639A91 /* MoneyBookViewModel.swift in Sources */,
 				D0A60A9A2903C4540075A170 /* SettingsRow.swift in Sources */,
 				D0A60A912903BB9C0075A170 /* MoneyBookView.swift in Sources */,
-				D0A60A9E2903D2210075A170 /* AppSettings.swift in Sources */,
+				D0A60A9E2903D2210075A170 /* AppDefine.swift in Sources */,
+				D0A0B2802955FDFA00639A91 /* Image+Extensions.swift in Sources */,
 				D0A60A952903BCB60075A170 /* SettingsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

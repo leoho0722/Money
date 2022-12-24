@@ -14,7 +14,7 @@ struct AddNewRecordTextFieldRow: View {
     
     var body: some View {
         HStack {
-            Image(systemName: "dollarsign.circle")
+            Image(sfSymbols: .dollar)
             Spacer()
             Text(transalte(key: .Price))
             Spacer()

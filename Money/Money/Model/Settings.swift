@@ -16,7 +16,7 @@ struct Settings {
 /// Settings 內一個 Section 要顯示的東西
 struct SettingsOptions: Identifiable {
     
-    var id = UUID().uuidString
+    var id = UUID()
     
     var sectionName: String
     
@@ -26,7 +26,7 @@ struct SettingsOptions: Identifiable {
 /// Settings 內 Row 要顯示的東西
 struct SettingsContent: Identifiable {
     
-    var id = UUID().uuidString
+    var id = UUID()
     
     var title: String
     
