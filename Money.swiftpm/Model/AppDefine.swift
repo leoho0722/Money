@@ -35,6 +35,9 @@ struct AppDefine {
         
         /// SF Symbols icon name：paintpalette.fill
         case paintpalette = "paintpalette.fill"
+        
+        /// SF Symbols icon name：trash.circle.fill
+        case trash = "trash.circle.fill"
     }
     
     /// enum 記帳類型
