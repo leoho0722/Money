@@ -14,6 +14,11 @@ struct DetailMoneyRecordView: View {
     
     @Environment(\.dismiss) private var dismiss
     
+    @AppStorage(.locale) private var locale: String = AppDefine.Locale.zh.rawValue
+    
+    /// 現在是否為編輯模式
+    @State private var isEditMode: EditMode = .inactive
+    
     @ObservedObject var moneyRecord: FetchedResults<MoneyRecord>.Element
     
     /// 使用者選擇的記帳類型 Index
@@ -32,77 +37,21 @@ struct DetailMoneyRecordView: View {
     @State private var inputNotes: String = ""
     
     var body: some View {
-        Form {
-            Picker("類型", selection: $selectedIndex) {
-                ForEach(AppDefine.RecordType.allCases) { recordType in
-                    Text(recordType.title).tag(recordType.rawValue)
-                }
-            }
-            .pickerStyle(.menu)
-            .onChange(of: selectedIndex) { newValue in
-                selectedIndex = newValue
-            }
-            
-            DatePicker("今天",
-                       selection: $selectedDate,
-                       in: ...Date(),
-                       displayedComponents: .date)
-            .onChange(of: selectedDate) { newValue in
-                selectedDate = newValue
-            }
-            
-            HStack {
-                Image(sfSymbols: .menucard)
-                Spacer()
-                Picker("分類", selection: $selectedCategory) {
-                    ForEach(AppDefine.Category.allCases) { category in
-                        Text(category.title).tag(category.rawValue)
-                    }
-                }
-                .pickerStyle(.menu)
-                .onChange(of: selectedCategory) { newValue in
-                    selectedCategory = newValue
-                }
-            }
-            
-            HStack {
-                Image(sfSymbols: .money)
-                Spacer()
-                Text("金額")
-                Spacer()
-                TextField("", text: $inputPrice, prompt: Text("輸入金額"))
-                    .padding(.leading)
-                    .keyboardType(.numberPad)
-                    .onChange(of: inputPrice) { newValue in
-                        inputPrice = newValue
-                    }
-            }
-            
-            VStack(alignment: .leading) {
-                Text("備註一下...")
-                    .padding(EdgeInsets(top: 5, leading: 5, bottom: 0, trailing: 5))
-                
-                TextEditor(text: $inputNotes)
-                    .frame(minHeight: 200)
-                    .lineSpacing(10) // 行距
-                    .autocorrectionDisabled(true) // 關閉自動校正
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 8)
-                            .stroke(.gray, lineWidth: 1)
-                    ) // 加上灰色邊框
-                    .padding(EdgeInsets(top: 0, leading: 5, bottom: 5, trailing: 5))
-                    .onChange(of: inputNotes) { newValue in
-                        inputNotes = newValue
-                    }
+        VStack {
+            if isEditMode == .active {
+                buildEditForm()
+            } else {
+                buildNormalForm()
             }
         }
-        .navigationTitle(Text("編輯記帳"))
+        .navigationTitle(Text(isEditMode == .active ? "編輯記帳" : "詳細記帳內容"))
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
-            ToolbarItemGroup {
-                Button {
+            Button {
+                if isEditMode.isEditing {
                     // 將編輯後的資料更新回 CoreData 內
                     moneyRecord.recordType = "\(selectedIndex)"
+                    moneyRecord.createdAt = selectedDate.toString()
                     moneyRecord.updateTimestamp = Int64(selectedDate.timeIntervalSince1970)
                     moneyRecord.itemName = "\(selectedCategory)"
                     moneyRecord.itemPrice = inputPrice
@@ -117,14 +66,23 @@ struct DetailMoneyRecordView: View {
                         }
                         dismiss()
                     }
-                } label: {
-                    Text("更新")
+                } else {
+                    switch isEditMode {
+                    case .inactive:
+                        self.isEditMode = .active
+                    case .active:
+                        self.isEditMode = .inactive
+                    default:
+                        break
+                    }
                 }
+            } label: {
+                Text(isEditMode.isEditing ? "更新" : "編輯")
             }
         }
         .onAppear {
             selectedIndex = Int(moneyRecord.recordType)!
-            selectedDate = Date(timeIntervalSince1970: TimeInterval(moneyRecord.createTimestamp))
+            selectedDate = Date(timestamp: moneyRecord.updateTimestamp)
             selectedCategory = Int(moneyRecord.itemName)!
             inputPrice = moneyRecord.itemPrice
             inputNotes = moneyRecord.notes
@@ -137,6 +95,87 @@ struct DetailMoneyRecordView: View {
                 .first?.windows
                 .filter({$0.isKeyWindow}).first
             keyWindow?.endEditing(true)
+        }
+    }
+    
+    /// 建構一般模式下的表單
+    @ViewBuilder private func buildNormalForm() -> some View {
+        Form {
+            Label("類型：\(AppDefine.RecordType.allCases[selectedIndex].title)", sfSymbols: .money)
+                .padding(5)
+            
+            Label("日期：\(moneyRecord.createdAt)", sfSymbols: .calender)
+                .padding(5)
+            
+            Label("分類：\(AppDefine.Category.allCases[selectedCategory].title)", sfSymbols: .menucard)
+                .padding(5)
+            
+            Label("金額：\(inputPrice)", sfSymbols: .money)
+                .padding(5)
+            
+            Label("備註：\(inputNotes)", sfSymbols: .notes)
+                .padding(5)
+        }
+    }
+    
+    /// 建構編輯模式下的表單
+    @ViewBuilder private func buildEditForm() -> some View {
+        Form {
+            Picker(selection: $selectedIndex) {
+                ForEach(AppDefine.RecordType.allCases) { recordType in
+                    Text(recordType.title).tag(recordType.rawValue)
+                }
+            } label: {
+                Label("類型", sfSymbols: .money)
+            }
+            .pickerStyle(.menu)
+            .onChange(of: selectedIndex) { newValue in
+                selectedIndex = newValue
+            }
+            
+            DatePicker(selection: $selectedDate,
+                       in: ...Date(),
+                       displayedComponents: .date) { Label("日期", sfSymbols: .calender) }
+                .environment(\.locale, Locale(identifier: locale))
+                .onChange(of: selectedDate) { newValue in
+                    selectedDate = newValue
+                }
+            
+            Picker(selection: $selectedCategory) {
+                ForEach(AppDefine.Category.allCases) { category in
+                    Text(category.title).tag(category.rawValue)
+                }
+            } label: {
+                Label("分類", sfSymbols: .menucard)
+            }
+            .pickerStyle(.menu)
+            .onChange(of: selectedCategory) { newValue in
+                selectedCategory = newValue
+            }
+            
+            HStack {
+                Label("金額", sfSymbols: .money)
+                TextField("", text: $inputPrice, prompt: Text("輸入金額"))
+                    .padding(.leading)
+                    .keyboardType(.numberPad)
+                    .onChange(of: inputPrice) { newValue in
+                        inputPrice = newValue
+                    }
+            }
+            
+            VStack(alignment: .leading) {
+                Label("備註一下...", sfSymbols: .notes)
+                    .padding(EdgeInsets(top: 5, leading: 0, bottom: 0, trailing: 0))
+                TextEditor(text: $inputNotes)
+                    .frame(minHeight: 200)
+                    .lineSpacing(10) // 行距
+                    .autocorrectionDisabled(true) // 關閉自動校正
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(.gray, lineWidth: 1)
+                    ) // 加上灰色邊框
+                    .padding(EdgeInsets(top: 0, leading: 5, bottom: 5, trailing: 5))
+            }
         }
     }
 }

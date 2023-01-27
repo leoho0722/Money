@@ -12,12 +12,29 @@ struct SettingsView: View {
     
     @AppStorage(.isUseDarkMode) private var isUseDarkMode: Bool = false
     
+    @AppStorage(.tintColor) private var tintColor: Color = .accentColor
+    
+    @AppStorage(.locale) private var locale: String = AppDefine.Locale.zh.rawValue
+    
     var body: some View {
         NavigationStack {
             Form {
+                Section("顯示") {
+                    Picker(selection: $locale) {
+                        ForEach(AppDefine.Locale.allCases) { locale in
+                            Text(locale.title)
+                        }
+                    } label: {
+                        Label("語系", sfSymbols: .calender)
+                    }
+                }
+                
                 Section("外觀") {
                     Toggle(isOn: $isUseDarkMode) {
                         Label("深色模式", sfSymbols: .moon)
+                    }
+                    ColorPicker(selection: $tintColor) {
+                        Label("App 主題色", sfSymbols: .paintpalette)
                     }
                 }
             }

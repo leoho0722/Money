@@ -14,6 +14,9 @@ class MoneyRecord: NSManagedObject, Identifiable {
     /// 該筆記帳紀錄的 UUID
     @NSManaged var id: UUID
     
+    /// 該筆記帳紀錄的建立時間字串
+    @NSManaged var createdAt: String
+    
     /// 該筆記帳紀錄的建立時間戳
     @NSManaged var createTimestamp: Int64
     

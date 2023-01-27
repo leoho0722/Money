@@ -25,6 +25,12 @@ struct PersistenceController {
         idAttribute.type = .uuid
         moneyRecordEntity.properties.append(idAttribute)
         
+        // 在 Entity 內建立一個型別為 String 的 createdAt 屬性
+        let createdAtAttribute = NSAttributeDescription()
+        createdAtAttribute.name = "createdAt"
+        createdAtAttribute.type = .string
+        moneyRecordEntity.properties.append(createdAtAttribute)
+        
         // 在 Entity 內建立一個型別為 Int64 的 createTimestamp 屬性
         let createTimestampAttribute = NSAttributeDescription()
         createTimestampAttribute.name = "createTimestamp"

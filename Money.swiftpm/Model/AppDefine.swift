@@ -26,8 +26,18 @@ struct AppDefine {
         
         /// SF Symbols icon name：moon.circle.fill
         case moon = "moon.circle.fill"
+        
+        /// SF Symbols icon name：calendar.circle.fill
+        case calender = "calendar.circle.fill"
+        
+        /// SF Symbols icon name：note.text
+        case notes = "note.text"
+        
+        /// SF Symbols icon name：paintpalette.fill
+        case paintpalette = "paintpalette.fill"
     }
     
+    /// enum 記帳類型
     enum RecordType: Int, CaseIterable, Identifiable {
         
         /// 收入
@@ -48,6 +58,7 @@ struct AppDefine {
         }
     }
     
+    /// enum 記帳種類
     enum Category: Int, CaseIterable, Identifiable {
         
         /// 三餐
@@ -84,6 +95,43 @@ struct AppDefine {
                 return "水費"
             case .gasFee:
                 return "瓦斯費"
+            }
+        }
+    }
+    
+    /// enum 顯示語系
+    enum Locale: String, CaseIterable, Identifiable {
+        
+        /// 中文
+        case zh
+        
+        /// 英文
+        case en
+        
+        /// 韓文
+        case ko
+        
+        var id: String { self.rawValue }
+        
+        var title: String {
+            switch self {
+            case .zh:
+                return "繁體／簡體中文"
+            case .en:
+                return "English"
+            case .ko:
+                return "한국어"
+            }
+        }
+        
+        var dateFormat: String {
+            switch self {
+            case .zh:
+                return "YYYY年MM月dd日"
+            case .en:
+                return "MM dd, YYYY"
+            case .ko:
+                return "YYYY. MM. dd."
             }
         }
     }
