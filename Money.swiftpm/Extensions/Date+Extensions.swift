@@ -16,8 +16,8 @@ extension Date {
     /// 將 Date 用 DateFormatter 轉為 YYYY/MM/dd 的日期字串
     func toString() -> String {
         let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: UserDefaults.standard.string(forKey: "locale") ?? "zh")
-        formatter.dateFormat = AppDefine.Locale(rawValue: UserDefaults.standard.string(forKey: "locale") ?? "zh")?.dateFormat
+        formatter.locale = .preferredLocale
+        formatter.dateFormat = AppDefine.Locale(rawValue: Locale.preferredLocaleToString)?.dateFormat
         return formatter.string(from: self)
     }
 }

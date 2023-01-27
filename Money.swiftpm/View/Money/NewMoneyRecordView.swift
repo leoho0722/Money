@@ -11,9 +11,7 @@ import SwiftUI
 struct NewMoneyRecordView: View {
     
     @Environment(\.managedObjectContext) private var viewContext
-    
-    @AppStorage(.locale) private var locale: String = AppDefine.Locale.zh.rawValue
-    
+        
     /// 使用者選擇的記帳類型 Index
     @State private var selectedIndex: Int = 0
     
@@ -53,7 +51,7 @@ struct NewMoneyRecordView: View {
                 DatePicker(selection: $selectedDate,
                            in: ...Date(),
                            displayedComponents: .date) { Label("今天", sfSymbols: .calender) }
-                    .environment(\.locale, Locale(identifier: locale))
+                    .environment(\.locale, Locale.preferredLocale)
                     .onChange(of: selectedDate) { newValue in
                         selectedDate = newValue
                     }
@@ -103,8 +101,8 @@ struct NewMoneyRecordView: View {
                         record.id = UUID()
                         record.recordType = "\(selectedIndex)" // 該筆記帳的類型
                         record.createdAt = selectedDate.toString() // 該筆記帳的紀錄時間字串
-                        record.createTimestamp = Int64(Date().timeIntervalSince1970) // 該筆記帳的建立時間戳
-                        record.updateTimestamp = Int64(Date().timeIntervalSince1970) // 該筆記帳的更新時間戳
+                        record.createTimestamp = Int64(selectedDate.timeIntervalSince1970) // 該筆記帳的建立時間戳
+                        record.updateTimestamp = Int64(selectedDate.timeIntervalSince1970) // 該筆記帳的更新時間戳
                         record.itemName = "\(selectedCategory)" // 該筆記帳的記帳分類
                         record.itemPrice = inputPrice // 該筆記帳的金額
                         record.notes = inputNotes // 該筆記帳的備註

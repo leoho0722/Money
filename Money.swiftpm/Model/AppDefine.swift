@@ -129,9 +129,9 @@ struct AppDefine {
             case .zh:
                 return "YYYY年MM月dd日"
             case .en:
-                return "MM dd, YYYY"
+                return "MMM dd, YYYY"
             case .ko:
-                return "YYYY. MM. dd."
+                return "YYYY. M. dd."
             }
         }
     }

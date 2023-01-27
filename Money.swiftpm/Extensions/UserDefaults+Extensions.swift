@@ -16,8 +16,5 @@ extension UserDefaults {
      
         /// App 外觀顏色
         case tintColor
-        
-        /// 顯示語系
-        case locale
     }
 }

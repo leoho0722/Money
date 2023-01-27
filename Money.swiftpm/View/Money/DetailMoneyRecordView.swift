@@ -13,9 +13,7 @@ struct DetailMoneyRecordView: View {
     @Environment(\.managedObjectContext) private var viewContext
     
     @Environment(\.dismiss) private var dismiss
-    
-    @AppStorage(.locale) private var locale: String = AppDefine.Locale.zh.rawValue
-    
+        
     /// 現在是否為編輯模式
     @State private var isEditMode: EditMode = .inactive
     
@@ -136,7 +134,7 @@ struct DetailMoneyRecordView: View {
             DatePicker(selection: $selectedDate,
                        in: ...Date(),
                        displayedComponents: .date) { Label("日期", sfSymbols: .calender) }
-                .environment(\.locale, Locale(identifier: locale))
+                .environment(\.locale, Locale.preferredLocale)
                 .onChange(of: selectedDate) { newValue in
                     selectedDate = newValue
                 }
