@@ -123,78 +123,50 @@ struct HistoryChartView: View {
 extension HistoryChartView {
    
     func calcIncome() {
-        var names: [Int] = []
         var prices: [String : Int] = [
             "0" : 0, "1" : 0, "2" : 0, "3" : 0, "4" : 0, "5" : 0,
         ]
+        
         incomeRecords.forEach { record in
-            if !(names.contains { $0 == Int(record.itemName)! }) {
-                names.append(Int(record.itemName)!)
-            }
             prices[record.itemName]! += Int(record.itemPrice) ?? 0
-        }
-        
-        names.sort { $0 < $1 }
-        
-        vm.incomeRecordNames = []
-        
-        names.forEach { name in
-            vm.incomeRecordNames.append(AppDefine.Category.allCases[name].title)
         }
         
         vm.incomeData = []
         
         prices.forEach { key, value in
-            vm.incomeRecordPrices[Int(key)!] = value
-            
             if value > 0 {
-                vm.incomeData.append(Record(name: AppDefine.Category.allCases[Int(key)!].title, price: value))
+                vm.incomeData.append(Record(name: AppDefine.Category.allCases[Int(key)!].title,
+                                            price: value))
             }
         }
         
         #if DEBUG
         print("========收入=========")
-        print(vm.incomeRecordNames)
-        print(vm.incomeRecordPrices)
         print(vm.incomeData)
         print("========收入=========\n")
         #endif
     }
     
     func calcExpenditure() {
-        var names: [Int] = []
         var prices: [String : Int] = [
             "0" : 0, "1" : 0, "2" : 0, "3" : 0, "4" : 0, "5" : 0,
         ]
         
         expenditureRecords.forEach { record in
-            if !(names.contains { $0 == Int(record.itemName)! }) {
-                names.append(Int(record.itemName)!)
-            }
             prices[record.itemName]! += Int(record.itemPrice) ?? 0
-        }
-        
-        names.sort { $0 < $1 }
-        
-        vm.expenditureRecordNames = []
-        
-        names.forEach { name in
-            vm.expenditureRecordNames.append(AppDefine.Category.allCases[name].title)
         }
         
         vm.expenditureData = []
         
         prices.forEach { key, value in
-            vm.expenditureRecordPrices[Int(key)!] = value
             if value > 0 {
-                vm.expenditureData.append(Record(name: AppDefine.Category.allCases[Int(key)!].title, price: value))
+                vm.expenditureData.append(Record(name: AppDefine.Category.allCases[Int(key)!].title,
+                                                 price: value))
             }
         }
         
         #if DEBUG
         print("========支出=========")
-        print(vm.expenditureRecordNames)
-        print(vm.expenditureRecordPrices)
         print(vm.expenditureData)
         print("========支出=========\n")
         #endif
@@ -202,18 +174,6 @@ extension HistoryChartView {
 }
 
 class HistoryChartViewModel: ObservableObject {
-    
-    /// 存放 `收入` 的類型名稱
-    var incomeRecordNames: [String] = []
-    
-    /// 存放 `收入` 的類型加總金額
-    var incomeRecordPrices: [Int] = Array(repeating: 0, count: 6)
-    
-    /// 存放 `支出` 的類型名稱
-    var expenditureRecordNames: [String] = []
-    
-    /// 存放 `支出` 的類型加總金額
-    var expenditureRecordPrices: [Int] = Array(repeating: 0, count: 6)
     
     /// 存放 `收入` 的資料
     @Published var incomeData: [Record] = []
