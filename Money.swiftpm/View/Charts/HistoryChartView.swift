@@ -29,19 +29,6 @@ struct HistoryChartView: View {
         NavigationStack {
             List {
                 Section("收入") {
-//                    Chart {
-//                        ForEach(incomeRecords) { record in
-//                            BarMark(
-//                                x: .value("類型", AppDefine.Category.allCases[Int(record.itemName) ?? 0].title),
-//                                y: .value("金額", record.itemPrice),
-//                                stacking: .center
-//                            ).foregroundStyle(by: .value("類型", AppDefine.Category.allCases[Int(record.itemName) ?? 0].title))
-//                        }
-//                    }
-//                    .chartXAxisLabel("類型", alignment: .leading)
-//                    .chartYAxisLabel("金額", alignment: .trailing)
-//                    .frame(height: 300)
-//                    .padding()
                     if vm.incomeData.count > 0 {
                         Chart {
                             ForEach(vm.incomeData) { record in
@@ -65,19 +52,6 @@ struct HistoryChartView: View {
                 }
                 
                 Section("支出") {
-//                    Chart {
-//                        ForEach(expenditureRecords) { record in
-//                            BarMark(
-//                                x: .value("類型", AppDefine.Category.allCases[Int(record.itemName) ?? 0].title),
-//                                y: .value("金額", record.itemPrice),
-//                                stacking: .center
-//                            ).foregroundStyle(by: .value("類型", AppDefine.Category.allCases[Int(record.itemName) ?? 0].title))
-//                        }
-//                    }
-//                    .chartXAxisLabel("類型", alignment: .leading)
-//                    .chartYAxisLabel("金額", alignment: .trailing)
-//                    .frame(height: 300)
-//                    .padding()
                     if vm.expenditureData.count > 0 {
                         Chart {
                             ForEach(vm.expenditureData) { record in
