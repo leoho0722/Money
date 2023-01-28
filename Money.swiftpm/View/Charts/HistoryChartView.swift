@@ -23,7 +23,7 @@ struct HistoryChartView: View {
         predicate: NSPredicate(format: "recordType == %@", "1")
     ) private var expenditureRecords: FetchedResults<MoneyRecord> // 1 = 支出
     
-    @ObservedObject var vm = HistoryChartViewModel()
+    @ObservedObject private var vm = HistoryChartViewModel()
     
     var body: some View {
         GeometryReader { proxy in
@@ -31,36 +31,7 @@ struct HistoryChartView: View {
                 List {
                     Section("收入，總收入 $\(vm.totalIncomePrice)") {
                         if vm.incomeData.count > 0 {
-                            VStack {
-                                Chart {
-                                    ForEach(vm.incomeData) { record in
-                                        BarMark(
-                                            x: .value("類型", record.name),
-                                            y: .value("金額", record.price)
-                                        )
-                                        .foregroundStyle(by: .value("類型", record.name))
-                                        .annotation {
-                                            Text("\(record.price)")
-                                        }
-                                    }
-                                }
-                                .chartXAxisLabel("類型", alignment: .leading)
-                                .chartYAxisLabel("金額", alignment: .trailing)
-                                .frame(height: 300)
-                                .padding()
-                                
-                                List {
-                                    ForEach(vm.incomeData) { incomeRecord in
-                                        HStack {
-                                            Label("\(incomeRecord.name)", sfSymbols: .filter)
-                                            Spacer()
-                                            Text("$\(incomeRecord.price)")
-                                        }
-                                    }
-                                }
-                                .listStyle(.plain)
-                                .frame(minHeight: calcMinHeight(data: vm.incomeData, proxy: proxy))
-                            }
+                            buildBarMark(data: vm.incomeData, proxy: proxy)
                         } else {
                             buildNoDataView(type: .income)
                         }
@@ -68,34 +39,7 @@ struct HistoryChartView: View {
                     
                     Section("支出，總花費 $\(vm.totalExpenditurePrice)") {
                         if vm.expenditureData.count > 0 {
-                            Chart {
-                                ForEach(vm.expenditureData) { record in
-                                    BarMark(
-                                        x: .value("類型", record.name),
-                                        y: .value("金額", record.price)
-                                    )
-                                    .foregroundStyle(by: .value("類型", record.name))
-                                    .annotation {
-                                        Text("\(record.price)")
-                                    }
-                                }
-                            }
-                            .chartXAxisLabel("類型", alignment: .leading)
-                            .chartYAxisLabel("金額", alignment: .trailing)
-                            .frame(height: 300)
-                            .padding()
-                            
-                            List {
-                                ForEach(vm.expenditureData) { expenditureRecord in
-                                    HStack {
-                                        Label("\(expenditureRecord.name)", sfSymbols: .filter)
-                                        Spacer()
-                                        Text("$\(expenditureRecord.price)")
-                                    }
-                                }
-                            }
-                            .listStyle(.plain)
-                            .frame(minHeight: calcMinHeight(data: vm.expenditureData, proxy: proxy))
+                            buildBarMark(data: vm.expenditureData, proxy: proxy)
                         } else {
                             buildNoDataView(type: .expenditure)
                         }
@@ -110,6 +54,12 @@ struct HistoryChartView: View {
             }
         }
     }
+}
+
+// MARK: - HistoryChartView @ViewBuilder
+
+@available(iOS 16.0, *)
+extension HistoryChartView {
     
     /// 建構無記帳資料時，Chart 要顯示的畫面
     /// - Parameters:
@@ -120,48 +70,50 @@ struct HistoryChartView: View {
         }
     }
     
-    
-    /// 計算不同類型數量 List 所需的最小顯示高度
+    /// 建構 `收入資料 or 支出資料` 的 BarMark 圖表
     /// - Parameters:
     ///   - data: 收入資料 or 支出資料
-    ///   - proxy: 畫面高度
-    /// - Returns: 計算完的高度
-    private func calcMinHeight(data: [Record], proxy: GeometryProxy) -> CGFloat  {
-        if data.count > 6 {
-            // 6 以上
-            print(proxy.size.height / 2)
-            return proxy.size.height / 2
-        } else if data.count == 6 {
-            // 6
-            print(proxy.size.height / 2.5)
-            return proxy.size.height / 2.5
-        } else if data.count == 5 {
-            // 5
-            print(proxy.size.height / 3)
-            return proxy.size.height / 3
-        } else if data.count == 5 {
-            // 4
-            print(proxy.size.height / 4)
-            return proxy.size.height / 4
-        } else if data.count == 5 {
-            // 3
-            print(proxy.size.height / 5)
-            return proxy.size.height / 5
-        } else if data.count == 5 {
-            // 2
-            print(proxy.size.height / 8)
-            return proxy.size.height / 8
-        } else {
-            // 1
-            print(proxy.size.height / 14)
-            return proxy.size.height / 14
+    ///   - proxy: 整個畫面的高度
+    @ViewBuilder private func buildBarMark(data: [Record], proxy: GeometryProxy) -> some View {
+        VStack {
+            Chart {
+                ForEach(data) { record in
+                    BarMark(
+                        x: .value("類型", record.name),
+                        y: .value("金額", record.price)
+                    )
+                    .foregroundStyle(by: .value("類型", record.name))
+                    .annotation {
+                        Text("\(record.price)")
+                    }
+                }
+            }
+            .chartXAxisLabel("類型", alignment: .leading)
+            .chartYAxisLabel("金額", alignment: .trailing)
+            .frame(height: 300)
+            .padding()
+            
+            List {
+                ForEach(data) { record in
+                    HStack {
+                        Label("\(record.name)", sfSymbols: .menucard)
+                        Spacer()
+                        Text("$\(record.price)")
+                    }
+                }
+            }
+            .listStyle(.plain)
+            .frame(minHeight: calcMinHeight(data: data, proxy: proxy))
         }
     }
 }
 
+// MARK: - HistoryChartView calc Function
+
 @available(iOS 16.0, *)
 extension HistoryChartView {
     
+    /// 計算／彙整收入資料
     func calcIncome() {
         var prices: [String : Int] = [
             "0" : 0, "1" : 0, "2" : 0, "3" : 0, "4" : 0, "5" : 0,
@@ -189,6 +141,7 @@ extension HistoryChartView {
         #endif
     }
     
+    /// 計算／彙整支出資料
     func calcExpenditure() {
         var prices: [String : Int] = [
             "0" : 0, "1" : 0, "2" : 0, "3" : 0, "4" : 0, "5" : 0,
@@ -214,5 +167,42 @@ extension HistoryChartView {
         print(vm.expenditureData)
         print("========支出=========\n")
         #endif
+    }
+    
+    /// 計算不同類型數量 List 所需的最小顯示高度
+    /// - Parameters:
+    ///   - data: 收入資料 or 支出資料
+    ///   - proxy: 畫面高度
+    /// - Returns: 計算完的高度
+    private func calcMinHeight(data: [Record], proxy: GeometryProxy) -> CGFloat  {
+        if data.count > 6 {
+            // 6 以上
+            print(proxy.size.height / 2)
+            return proxy.size.height / 2
+        } else if data.count == 6 {
+            // 6
+            print(proxy.size.height / 2.5)
+            return proxy.size.height / 2.5
+        } else if data.count == 5 {
+            // 5
+            print(proxy.size.height / 3)
+            return proxy.size.height / 3
+        } else if data.count == 4 {
+            // 4
+            print(proxy.size.height / 4)
+            return proxy.size.height / 4
+        } else if data.count == 3 {
+            // 3
+            print(proxy.size.height / 5)
+            return proxy.size.height / 5
+        } else if data.count == 2 {
+            // 2
+            print(proxy.size.height / 8)
+            return proxy.size.height / 8
+        } else {
+            // 1
+            print(proxy.size.height / 14)
+            return proxy.size.height / 14
+        }
     }
 }
