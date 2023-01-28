@@ -22,63 +22,91 @@ struct HistoryChartView: View {
         sortDescriptors: [],
         predicate: NSPredicate(format: "recordType == %@", "1")
     ) private var expenditureRecords: FetchedResults<MoneyRecord> // 1 = 支出
-        
+    
     @ObservedObject var vm = HistoryChartViewModel()
     
     var body: some View {
-        NavigationStack {
-            List {
-                Section("收入") {
-                    if vm.incomeData.count > 0 {
-                        Chart {
-                            ForEach(vm.incomeData) { record in
-                                BarMark(
-                                    x: .value("類型", record.name),
-                                    y: .value("金額", record.price)
-                                )
-                                .foregroundStyle(by: .value("類型", record.name))
-                                .annotation {
-                                    Text("\(record.price)")
+        GeometryReader { proxy in
+            NavigationStack {
+                List {
+                    Section("收入，總收入 $\(vm.totalIncomePrice)") {
+                        if vm.incomeData.count > 0 {
+                            VStack {
+                                Chart {
+                                    ForEach(vm.incomeData) { record in
+                                        BarMark(
+                                            x: .value("類型", record.name),
+                                            y: .value("金額", record.price)
+                                        )
+                                        .foregroundStyle(by: .value("類型", record.name))
+                                        .annotation {
+                                            Text("\(record.price)")
+                                        }
+                                    }
+                                }
+                                .chartXAxisLabel("類型", alignment: .leading)
+                                .chartYAxisLabel("金額", alignment: .trailing)
+                                .frame(height: 300)
+                                .padding()
+                                
+                                List {
+                                    ForEach(vm.incomeData) { incomeRecord in
+                                        HStack {
+                                            Label("\(incomeRecord.name)", sfSymbols: .filter)
+                                            Spacer()
+                                            Text("$\(incomeRecord.price)")
+                                        }
+                                    }
+                                }
+                                .listStyle(.plain)
+                                .frame(minHeight: calcMinHeight(data: vm.incomeData, proxy: proxy))
+                            }
+                        } else {
+                            buildNoDataView(type: .income)
+                        }
+                    }
+                    
+                    Section("支出，總花費 $\(vm.totalExpenditurePrice)") {
+                        if vm.expenditureData.count > 0 {
+                            Chart {
+                                ForEach(vm.expenditureData) { record in
+                                    BarMark(
+                                        x: .value("類型", record.name),
+                                        y: .value("金額", record.price)
+                                    )
+                                    .foregroundStyle(by: .value("類型", record.name))
+                                    .annotation {
+                                        Text("\(record.price)")
+                                    }
                                 }
                             }
-                        }
-                        .chartXAxisLabel("類型", alignment: .leading)
-                        .chartYAxisLabel("金額", alignment: .trailing)
-                        .frame(height: 300)
-                        .padding()
-                    } else {
-                        buildNoDataView(type: .income)
-                    }
-                }
-                
-                Section("支出") {
-                    if vm.expenditureData.count > 0 {
-                        Chart {
-                            ForEach(vm.expenditureData) { record in
-                                BarMark(
-                                    x: .value("類型", record.name),
-                                    y: .value("金額", record.price)
-                                )
-                                .foregroundStyle(by: .value("類型", record.name))
-                                .annotation {
-                                    Text("\(record.price)")
+                            .chartXAxisLabel("類型", alignment: .leading)
+                            .chartYAxisLabel("金額", alignment: .trailing)
+                            .frame(height: 300)
+                            .padding()
+                            
+                            List {
+                                ForEach(vm.expenditureData) { expenditureRecord in
+                                    HStack {
+                                        Label("\(expenditureRecord.name)", sfSymbols: .filter)
+                                        Spacer()
+                                        Text("$\(expenditureRecord.price)")
+                                    }
                                 }
                             }
+                            .listStyle(.plain)
+                            .frame(minHeight: calcMinHeight(data: vm.expenditureData, proxy: proxy))
+                        } else {
+                            buildNoDataView(type: .expenditure)
                         }
-                        .chartXAxisLabel("類型", alignment: .leading)
-                        .chartYAxisLabel("金額", alignment: .trailing)
-                        .frame(height: 300)
-                        .padding()
-                    } else {
-                        buildNoDataView(type: .expenditure)
                     }
                 }
-            }
-            .navigationTitle("記帳圖表")
-            .navigationBarTitleDisplayMode(.inline)
-            .onAppear {
-                calcIncome()
-                calcExpenditure()
+                .navigationTitle("記帳圖表")
+                .navigationBarTitleDisplayMode(.inline)
+                .onAppear {
+                    calcIncome()
+                    calcExpenditure()
+                }
             }
         }
     }
@@ -91,11 +119,49 @@ struct HistoryChartView: View {
             Label("目前尚無\(type.title)記帳資料！", sfSymbols: .xmark)
         }
     }
+    
+    
+    /// 計算不同類型數量 List 所需的最小顯示高度
+    /// - Parameters:
+    ///   - data: 收入資料 or 支出資料
+    ///   - proxy: 畫面高度
+    /// - Returns: 計算完的高度
+    private func calcMinHeight(data: [Record], proxy: GeometryProxy) -> CGFloat  {
+        if data.count > 6 {
+            // 6 以上
+            print(proxy.size.height / 2)
+            return proxy.size.height / 2
+        } else if data.count == 6 {
+            // 6
+            print(proxy.size.height / 2.5)
+            return proxy.size.height / 2.5
+        } else if data.count == 5 {
+            // 5
+            print(proxy.size.height / 3)
+            return proxy.size.height / 3
+        } else if data.count == 5 {
+            // 4
+            print(proxy.size.height / 4)
+            return proxy.size.height / 4
+        } else if data.count == 5 {
+            // 3
+            print(proxy.size.height / 5)
+            return proxy.size.height / 5
+        } else if data.count == 5 {
+            // 2
+            print(proxy.size.height / 8)
+            return proxy.size.height / 8
+        } else {
+            // 1
+            print(proxy.size.height / 14)
+            return proxy.size.height / 14
+        }
+    }
 }
 
 @available(iOS 16.0, *)
 extension HistoryChartView {
-   
+    
     func calcIncome() {
         var prices: [String : Int] = [
             "0" : 0, "1" : 0, "2" : 0, "3" : 0, "4" : 0, "5" : 0,
@@ -106,8 +172,10 @@ extension HistoryChartView {
         }
         
         vm.incomeData = []
+        vm.totalIncomePrice = 0
         
         prices.forEach { key, value in
+            vm.totalIncomePrice += value
             if value > 0 {
                 vm.incomeData.append(Record(name: AppDefine.Category.allCases[Int(key)!].title,
                                             price: value))
@@ -131,8 +199,10 @@ extension HistoryChartView {
         }
         
         vm.expenditureData = []
+        vm.totalExpenditurePrice = 0
         
         prices.forEach { key, value in
+            vm.totalExpenditurePrice += value
             if value > 0 {
                 vm.expenditureData.append(Record(name: AppDefine.Category.allCases[Int(key)!].title,
                                                  price: value))
@@ -148,6 +218,10 @@ extension HistoryChartView {
 }
 
 class HistoryChartViewModel: ObservableObject {
+    
+    @Published var totalIncomePrice: Int = 0
+    
+    @Published var totalExpenditurePrice: Int = 0
     
     /// 存放 `收入` 的資料
     @Published var incomeData: [Record] = []
