@@ -38,6 +38,15 @@ struct AppDefine {
         
         /// SF Symbols icon name：trash.circle.fill
         case trash = "trash.circle.fill"
+        
+        /// SF Symbols icon name：chart.line.uptrend.xyaxis.circle.fill
+        case chart = "chart.line.uptrend.xyaxis.circle.fill"
+        
+        /// SF Symbols icon name：line.3.horizontal.decrease.circle.fill
+        case filter = "line.3.horizontal.decrease.circle.fill"
+        
+        /// SF Symbols icon name：xmark.seal.fill
+        case xmark = "xmark.seal.fill"
     }
     
     /// enum 記帳類型

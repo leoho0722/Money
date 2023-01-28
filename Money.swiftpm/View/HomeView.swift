@@ -19,6 +19,10 @@ struct HomeView: View {
                 .tabItem {
                     Label("記帳一下", sfSymbols: .money)
                 }
+            HistoryChartView()
+                .tabItem {
+                    Label("記帳圖表", sfSymbols: .chart)
+                }
             SettingsView()
                 .tabItem {
                     Label("設定", sfSymbols: .settings)
