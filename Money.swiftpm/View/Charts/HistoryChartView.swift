@@ -216,25 +216,3 @@ extension HistoryChartView {
         #endif
     }
 }
-
-class HistoryChartViewModel: ObservableObject {
-    
-    @Published var totalIncomePrice: Int = 0
-    
-    @Published var totalExpenditurePrice: Int = 0
-    
-    /// 存放 `收入` 的資料
-    @Published var incomeData: [Record] = []
-    
-    /// 存放 `支出` 的資料
-    @Published var expenditureData: [Record] = []
-}
-
-struct Record: Identifiable {
-    
-    let id = UUID()
-    
-    let name: String
-    
-    let price: Int
-}
