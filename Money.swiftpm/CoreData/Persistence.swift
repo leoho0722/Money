@@ -5,6 +5,7 @@
 //  Created by Leo Ho on 2023/1/20.
 //
 
+import SwiftUI
 import CoreData
 
 struct PersistenceController {
@@ -76,14 +77,29 @@ struct PersistenceController {
         if inMemory {
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
         }
-        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+        container.loadPersistentStores { storeDescription, error in
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             } else {
                 print(storeDescription)
             }
-        })
+        }
         
 //        container.viewContext.automaticallyMergesChangesFromParent = true
+    }
+    
+    /// 刪除 CoreData Entity 內全部的資料
+    /// - Parameters:
+    ///   - data: FetchedResults`<Result>`，Result: NSFetchRequestResult
+    func deleteAllData<Result>(data: FetchedResults<Result>) where Result: NSFetchRequestResult {
+        data.forEach { record in
+            container.viewContext.delete(record as! NSManagedObject)
+        }
+        
+        do {
+            try container.viewContext.save()
+        } catch {
+            print("清除 CoreData 所有資料，Error：\(error.localizedDescription)")
+        }
     }
 }
