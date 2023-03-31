@@ -13,7 +13,7 @@ extension Date {
         self.init(timeIntervalSince1970: TimeInterval(timestamp))
     }
     
-    /// 將 Date 用 DateFormatter 轉為 YYYY/MM/dd 的日期字串
+    /// Convert Date to YYYY/MM/dd date string using DateFormatter
     func toString() -> String {
         let formatter = DateFormatter()
         formatter.locale = .preferredLocale

@@ -11,17 +11,17 @@ extension UserDefaults {
     
     enum Keys: String, CaseIterable {
         
-        /// 是否使用深色模式
+        /// Whether use Dark Mode or not.
         case isUseDarkMode
      
-        /// App 外觀顏色
+        /// App Apperance Color
         case tintColor
         
-        /// 使用者設定的記帳分類
+        /// User-defined billing categories
         case categorys
     }
     
-    /// 將 UserDefaults 內的值全部重設
+    /// Reset all settings in UserDefaults
     func resetAllSettings() {
         Keys.allCases.forEach { removeObject(forKey: $0.rawValue) }
     }

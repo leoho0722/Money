@@ -41,7 +41,7 @@ struct NewMoneyRecordView: View {
                         Text(recordType.title).tag(recordType.rawValue)
                     }
                 } label: {
-                    Label("類型", sfSymbols: .money)
+                    Label("Type", sfSymbols: .money)
                 }
                 .pickerStyle(.menu)
                 .onChange(of: selectedIndex) { newValue in
@@ -50,7 +50,7 @@ struct NewMoneyRecordView: View {
                 
                 DatePicker(selection: $selectedDate,
                            in: ...Date(),
-                           displayedComponents: .date) { Label("今天", sfSymbols: .calender) }
+                           displayedComponents: .date) { Label("Today", sfSymbols: .calender) }
                     .environment(\.locale, Locale.preferredLocale)
                     .onChange(of: selectedDate) { newValue in
                         selectedDate = newValue
@@ -61,7 +61,7 @@ struct NewMoneyRecordView: View {
                         Text(category.title).tag(category.rawValue)
                     }
                 } label: {
-                    Label("分類", sfSymbols: .menucard)
+                    Label("Category", sfSymbols: .menucard)
                 }
                 .pickerStyle(.menu)
                 .onChange(of: selectedCategory) { newValue in
@@ -69,14 +69,14 @@ struct NewMoneyRecordView: View {
                 }
                 
                 HStack {
-                    Label("金額", sfSymbols: .money)
-                    TextField("", text: $inputPrice, prompt: Text("輸入金額"))
+                    Label("Price", sfSymbols: .money)
+                    TextField("", text: $inputPrice, prompt: Text("Input price"))
                         .padding(.leading)
                         .keyboardType(.numberPad)
                 }
                 
                 VStack(alignment: .leading) {
-                    Label("備註一下...", sfSymbols: .notes)
+                    Label("Note...", sfSymbols: .notes)
                         .padding(EdgeInsets(top: 5, leading: 0, bottom: 0, trailing: 0))
                     TextEditor(text: $inputNotes)
                         .frame(minHeight: 200)
@@ -89,7 +89,7 @@ struct NewMoneyRecordView: View {
                         .padding(EdgeInsets(top: 0, leading: 5, bottom: 5, trailing: 5))
                 }
             }
-            .navigationTitle(Text("新增記帳"))
+            .navigationTitle(Text("Add accounting"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 Button {
@@ -116,11 +116,11 @@ struct NewMoneyRecordView: View {
                         }
                     }
                 } label: {
-                    Text("儲存")
-                }.alert(Text("警告"), isPresented: $isPresentAlert) {
-                    Button("關閉") {}
+                    Text("Save")
+                }.alert(Text("Warnings"), isPresented: $isPresentAlert) {
+                    Button("Close") {}
                 } message: {
-                    Text("尚有資訊沒有填寫")
+                    Text("There is still information not filled")
                 }
             }
             .onTapGesture {

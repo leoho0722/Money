@@ -17,15 +17,15 @@ struct HomeView: View {
         TabView {
             MoneyRecordView()
                 .tabItem {
-                    Label("記帳一下", sfSymbols: .money)
+                    Label("Record", sfSymbols: .money)
                 }
             HistoryChartView()
                 .tabItem {
-                    Label("記帳圖表", sfSymbols: .chart)
+                    Label("Charts", sfSymbols: .chart)
                 }
             SettingsView()
                 .tabItem {
-                    Label("設定", sfSymbols: .settings)
+                    Label("Settings", sfSymbols: .settings)
                 }
         }.preferredColorScheme(isUseDarkMode ? .dark : .light)
     }

@@ -51,5 +51,5 @@ struct FilteredList<T: NSManagedObject, Content: View>: View where T: Identifiab
 }
 
 /*
- 參考來源：https://www.hackingwithswift.com/books/ios-swiftui/dynamically-filtering-fetchrequest-with-swiftui
+ Reference Source：https://www.hackingwithswift.com/books/ios-swiftui/dynamically-filtering-fetchrequest-with-swiftui
  */

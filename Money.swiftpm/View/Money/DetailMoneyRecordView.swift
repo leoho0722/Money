@@ -42,7 +42,7 @@ struct DetailMoneyRecordView: View {
                 buildNormalForm()
             }
         }
-        .navigationTitle(Text(isEditMode == .active ? "編輯記帳" : "詳細記帳內容"))
+        .navigationTitle(Text(isEditMode == .active ? "Edit accounting" : "Detailed accounting content"))
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             Button {
@@ -75,7 +75,7 @@ struct DetailMoneyRecordView: View {
                     }
                 }
             } label: {
-                Text(isEditMode.isEditing ? "更新" : "編輯")
+                Text(isEditMode.isEditing ? "Update" : "Edit")
             }
         }
         .onAppear {
@@ -99,19 +99,19 @@ struct DetailMoneyRecordView: View {
     /// 建構一般模式下的表單
     @ViewBuilder private func buildNormalForm() -> some View {
         Form {
-            Label("類型：\(AppDefine.RecordType.allCases[selectedIndex].title)", sfSymbols: .money)
+            Label("Type：\(AppDefine.RecordType.allCases[selectedIndex].title)", sfSymbols: .money)
                 .padding(5)
             
-            Label("日期：\(moneyRecord.createdAt)", sfSymbols: .calender)
+            Label("Date：\(moneyRecord.createdAt)", sfSymbols: .calender)
                 .padding(5)
             
-            Label("分類：\(AppDefine.Category.allCases[selectedCategory].title)", sfSymbols: .menucard)
+            Label("Category：\(AppDefine.Category.allCases[selectedCategory].title)", sfSymbols: .menucard)
                 .padding(5)
             
-            Label("金額：\(inputPrice)", sfSymbols: .money)
+            Label("Price：\(inputPrice)", sfSymbols: .money)
                 .padding(5)
             
-            Label("備註：\(inputNotes)", sfSymbols: .notes)
+            Label("Notes：\(inputNotes)", sfSymbols: .notes)
                 .padding(5)
         }
     }
@@ -124,7 +124,7 @@ struct DetailMoneyRecordView: View {
                     Text(recordType.title).tag(recordType.rawValue)
                 }
             } label: {
-                Label("類型", sfSymbols: .money)
+                Label("Type", sfSymbols: .money)
             }
             .pickerStyle(.menu)
             .onChange(of: selectedIndex) { newValue in
@@ -133,7 +133,7 @@ struct DetailMoneyRecordView: View {
             
             DatePicker(selection: $selectedDate,
                        in: ...Date(),
-                       displayedComponents: .date) { Label("日期", sfSymbols: .calender) }
+                       displayedComponents: .date) { Label("Date", sfSymbols: .calender) }
                 .environment(\.locale, Locale.preferredLocale)
                 .onChange(of: selectedDate) { newValue in
                     selectedDate = newValue
@@ -144,7 +144,7 @@ struct DetailMoneyRecordView: View {
                     Text(category.title).tag(category.rawValue)
                 }
             } label: {
-                Label("分類", sfSymbols: .menucard)
+                Label("Category", sfSymbols: .menucard)
             }
             .pickerStyle(.menu)
             .onChange(of: selectedCategory) { newValue in
@@ -152,8 +152,8 @@ struct DetailMoneyRecordView: View {
             }
             
             HStack {
-                Label("金額", sfSymbols: .money)
-                TextField("", text: $inputPrice, prompt: Text("輸入金額"))
+                Label("Price", sfSymbols: .money)
+                TextField("", text: $inputPrice, prompt: Text("Input Price"))
                     .padding(.leading)
                     .keyboardType(.numberPad)
                     .onChange(of: inputPrice) { newValue in
@@ -162,7 +162,7 @@ struct DetailMoneyRecordView: View {
             }
             
             VStack(alignment: .leading) {
-                Label("備註一下...", sfSymbols: .notes)
+                Label("Note...", sfSymbols: .notes)
                     .padding(EdgeInsets(top: 5, leading: 0, bottom: 0, trailing: 0))
                 TextEditor(text: $inputNotes)
                     .frame(minHeight: 200)

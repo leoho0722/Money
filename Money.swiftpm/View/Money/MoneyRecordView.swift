@@ -47,7 +47,7 @@ struct MoneyRecordView: View {
                     buildNoRecordView()
                 }
             }
-            .navigationTitle("記帳一下")
+            .navigationTitle("Keep an account")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItemGroup {
@@ -70,7 +70,7 @@ struct MoneyRecordView: View {
     /// 建構無記帳資料的畫面
     @ViewBuilder private func buildNoRecordView() -> some View {
         VStack {
-            Label("目前尚無記帳資料！", sfSymbols: .money)
+            Label("There is no billing information yet!", sfSymbols: .money)
                 .padding()
         }
     }

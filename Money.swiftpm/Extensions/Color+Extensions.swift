@@ -36,5 +36,5 @@ extension Color: RawRepresentable {
 }
 
 /*
- 參考來源：https://medium.com/geekculture/using-appstorage-with-swiftui-colors-and-some-nskeyedarchiver-magic-a38038383c5e
+ Reference Source：https://medium.com/geekculture/using-appstorage-with-swiftui-colors-and-some-nskeyedarchiver-magic-a38038383c5e
  */

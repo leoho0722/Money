@@ -27,5 +27,5 @@ extension Array: RawRepresentable where Element: Codable {
 }
 
 /*
- 參考來源：https://www.fatbobman.com/posts/appstorage/
+ Reference Source：https://www.fatbobman.com/posts/appstorage/
  */

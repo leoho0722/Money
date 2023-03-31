@@ -15,13 +15,13 @@ struct HistoryChartView: View {
         entity: MoneyRecord.entity(),
         sortDescriptors: [],
         predicate: NSPredicate(format: "recordType == %@", "0")
-    ) private var incomeRecords: FetchedResults<MoneyRecord> // 0 = 收入
+    ) private var incomeRecords: FetchedResults<MoneyRecord> // 0 = Income
     
     @FetchRequest(
         entity: MoneyRecord.entity(),
         sortDescriptors: [],
         predicate: NSPredicate(format: "recordType == %@", "1")
-    ) private var expenditureRecords: FetchedResults<MoneyRecord> // 1 = 支出
+    ) private var expenditureRecords: FetchedResults<MoneyRecord> // 1 = Expenditure
     
     @ObservedObject private var vm = HistoryChartViewModel()
     
@@ -29,7 +29,7 @@ struct HistoryChartView: View {
         GeometryReader { proxy in
             NavigationStack {
                 List {
-                    Section("收入，總收入 $\(vm.totalIncomePrice)") {
+                    Section("Revenue，Total revenue $\(vm.totalIncomePrice)") {
                         if vm.incomeData.count > 0 {
                             buildBarMark(data: vm.incomeData, proxy: proxy)
                         } else {
@@ -37,7 +37,7 @@ struct HistoryChartView: View {
                         }
                     }
                     
-                    Section("支出，總花費 $\(vm.totalExpenditurePrice)") {
+                    Section("Expenditure，Total cost $\(vm.totalExpenditurePrice)") {
                         if vm.expenditureData.count > 0 {
                             buildBarMark(data: vm.expenditureData, proxy: proxy)
                         } else {
@@ -45,7 +45,7 @@ struct HistoryChartView: View {
                         }
                     }
                 }
-                .navigationTitle("記帳圖表")
+                .navigationTitle("Billing Charts")
                 .navigationBarTitleDisplayMode(.inline)
                 .onAppear {
                     calcIncome()
@@ -66,7 +66,7 @@ extension HistoryChartView {
     ///   - type: AppDefine.RecordType，收入 or 支出
     @ViewBuilder private func buildNoDataView(type: AppDefine.RecordType) -> some View {
         VStack {
-            Label("目前尚無\(type.title)記帳資料！", sfSymbols: .xmark)
+            Label("Currently there is no \(type.title) billing information!", sfSymbols: .xmark)
         }
     }
     
@@ -79,17 +79,17 @@ extension HistoryChartView {
             Chart {
                 ForEach(data) { record in
                     BarMark(
-                        x: .value("類型", record.name),
-                        y: .value("金額", record.price)
+                        x: .value("Type", record.name),
+                        y: .value("Price", record.price)
                     )
-                    .foregroundStyle(by: .value("類型", record.name))
+                    .foregroundStyle(by: .value("Type", record.name))
                     .annotation {
                         Text("\(record.price)")
                     }
                 }
             }
-            .chartXAxisLabel("類型", alignment: .leading)
-            .chartYAxisLabel("金額", alignment: .trailing)
+            .chartXAxisLabel("Type", alignment: .leading)
+            .chartYAxisLabel("Price", alignment: .trailing)
             .frame(height: 300)
             .padding()
             
@@ -135,9 +135,9 @@ extension HistoryChartView {
         }
         
         #if DEBUG
-        print("========收入=========")
+        print("========Income=========")
         print(vm.incomeData)
-        print("========收入=========\n")
+        print("========Income=========\n")
         #endif
     }
     
@@ -163,9 +163,9 @@ extension HistoryChartView {
         }
         
         #if DEBUG
-        print("========支出=========")
+        print("========Expenditure=========")
         print(vm.expenditureData)
-        print("========支出=========\n")
+        print("========Expenditure=========\n")
         #endif
     }
     

@@ -24,44 +24,44 @@ struct SettingsView: View {
     var body: some View {
         NavigationStack {
             Form {
-                Section("外觀") {
+                Section("Appearance") {
                     Toggle(isOn: $isUseDarkMode) {
-                        Label("深色模式", sfSymbols: .moon)
+                        Label("Dark Mode", sfSymbols: .moon)
                     }
                     ColorPicker(selection: $tintColor) {
-                        Label("App 主題色", sfSymbols: .paintpalette)
+                        Label("App Theme Color", sfSymbols: .paintpalette)
                     }
                 }
                 
-//                Section("基本設定") {
+//                Section("Basic") {
 //                    NavigationLink {
 //                        CategorySettingsList()
 //                    } label: {
-//                        Label("記帳分類", sfSymbols: .menucard)
+//                        Label("Accounting Category", sfSymbols: .menucard)
 //                    }
 //                }
                 
-                Section("進階設定") {
+                Section("Advanced") {
                     Button(role: .destructive) {
                         isPresentResetAlert.toggle()
                     } label: {
-                        Label("清除所有內容與設定", sfSymbols: .trash)
+                        Label("Reset All content and settings", sfSymbols: .trash)
                             .foregroundColor(.red)
                     }
-                    .confirmationDialog("清除所有內容與設定", isPresented: $isPresentResetAlert) {
-                        Button("確認", role: .destructive) {
+                    .confirmationDialog("Reset All content and settings", isPresented: $isPresentResetAlert) {
+                        Button("Confirm", role: .destructive) {
                             UserDefaults.standard.resetAllSettings()
                             
                             PersistenceController.shared.deleteAllData(data: moneyRecords)
                         }
                         
-                        Button("取消", role: .cancel, action: {})
+                        Button("Cancel", role: .cancel, action: {})
                     } message: {
-                        Text("此操作將會清除 App 內所有內容與設定\n是否要繼續進行操作？")
+                        Text("This operation will clear all content and settings in the app\nDo you want to proceed?")
                     }
                 }
             }
-            .navigationTitle("設定")
+            .navigationTitle("Settings")
             .navigationBarTitleDisplayMode(.large)
         }
     }

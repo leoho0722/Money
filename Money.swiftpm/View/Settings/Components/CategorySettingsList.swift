@@ -38,8 +38,8 @@ struct CategorySettingsList: View {
                     if isEditMode == .active {
                         VStack {
                             HStack {
-                                Label("新分類", sfSymbols: .menucard)
-                                TextField("", text: $newInputCategory, prompt: Text("建立新分類"))
+                                Label("New Category", sfSymbols: .menucard)
+                                TextField("", text: $newInputCategory, prompt: Text("Create New Category"))
                                     .padding(.leading)
                                     .focused($isFocused)
                                     .onSubmit {
@@ -57,7 +57,7 @@ struct CategorySettingsList: View {
                                 isEditMode = .inactive
                                 isFocused.toggle()
                             } label: {
-                                Label("取消", sfSymbols: .xmark)
+                                Label("Cancel", sfSymbols: .xmark)
                                     .padding()
                                     .foregroundColor(.white)
                                     .background(.red)
@@ -69,7 +69,7 @@ struct CategorySettingsList: View {
                 }
             }
         }
-        .navigationTitle("記帳分類")
+        .navigationTitle("Accounting Category")
         .navigationBarTitleDisplayMode(.automatic)
         .toolbar {
             Button {
@@ -90,7 +90,7 @@ struct CategorySettingsList: View {
                     }
                 }
             } label: {
-                Text(isEditMode.isEditing ? "完成" : "新增")
+                Text(isEditMode.isEditing ? "Done" : "Add")
             }
         }
     }

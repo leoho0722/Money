@@ -63,9 +63,9 @@ struct AppDefine {
         var title: String {
             switch self {
             case .income:
-                return "收入"
+                return "Income"
             case .expenditure:
-                return "支出"
+                return "Expenditure"
             }
         }
     }
@@ -73,22 +73,22 @@ struct AppDefine {
     /// enum 記帳種類
     enum Category: Int, CaseIterable, Identifiable {
         
-        /// 三餐
+        /// Meals
         case meals = 0
         
-        /// 交通
+        /// Traffic
         case traffic
         
-        /// 娛樂
+        /// Entertainment
         case entertainment
         
-        /// 電信費
+        /// Telecom Charges
         case telecomCharges
         
-        /// 水費
+        /// Water Bill
         case waterBill
         
-        /// 瓦斯費
+        /// Gas Fee
         case gasFee
         
         var id: Int { self.rawValue }
@@ -96,17 +96,17 @@ struct AppDefine {
         var title: String {
             switch self {
             case .meals:
-                return "三餐"
+                return "Meals"
             case .traffic:
-                return "交通"
+                return "Traffic"
             case .entertainment:
-                return "娛樂"
+                return "Entertainment"
             case .telecomCharges:
-                return "電信費"
+                return "Telecom Charges"
             case .waterBill:
-                return "水費"
+                return "Water Bill"
             case .gasFee:
-                return "瓦斯費"
+                return "Gas Fee"
             }
         }
     }
