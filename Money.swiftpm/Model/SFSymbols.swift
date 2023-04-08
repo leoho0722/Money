@@ -51,4 +51,7 @@ enum SFSymbols: String {
     
     /// SF Symbols icon name：faceid
     case faceid = "faceid"
+    
+    /// SF Symbols icon name：info.circle.fill
+    case info = "info.circle.fill"
 }

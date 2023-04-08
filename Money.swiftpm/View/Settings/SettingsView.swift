@@ -28,6 +28,7 @@ struct SettingsView: View {
     @State private var isPresentedResetAllDataAlert: Bool = false
     @State private var isPresentedResetAllUserSettingsAlert: Bool = false
     @State private var isPresentedResetAllAlert: Bool = false
+    @State private var isPresentedAboutAlert: Bool = false
     
     var body: some View {
         NavigationStack {
@@ -107,6 +108,18 @@ extension SettingsView {
                 .modifier(ResetAllDataModifier(isPresented: $isPresentedResetAllDataAlert, data: moneyRecords))
                 .modifier(ResetAllUserSettingsModifier(isPresented: $isPresentedResetAllUserSettingsAlert))
                 .modifier(ResetAllModifier(isPresented: $isPresentedResetAllAlert, data: moneyRecords))
+            }
+            
+            Section {
+                Button {
+                    isPresentedAboutAlert.toggle()
+                } label: {
+                    Label("About", icon: .info)
+                }.alert("About", isPresented: $isPresentedAboutAlert) {
+                    Button("Close", action: {})
+                } message: {
+                    Text("App Version：Swift Student Chanllenge WWDC23")
+                }
             }
         }
     }
