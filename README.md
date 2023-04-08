@@ -12,5 +12,6 @@ App Name：Money
 - Xcode 14.3
 - Support iOS、iPadOS、macOS system
 - Use Swift Playgrounds App + SwiftUI to develop
-- Use CoreData to save Data
+- Use CoreData Framework to save Data
 - Use Swift Charts Framework to draw Charts
+- Use Local Authentication Framework to unlock App
