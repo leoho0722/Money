@@ -1,13 +1,12 @@
 //
 //  DetailMoneyRecordView.swift
-//  
+//  Money
 //
 //  Created by Leo Ho on 2023/1/21.
 //
 
 import SwiftUI
 
-@available(iOS 16.0, *)
 struct DetailMoneyRecordView: View {
     
     @Environment(\.managedObjectContext) private var viewContext
@@ -42,41 +41,10 @@ struct DetailMoneyRecordView: View {
                 buildNormalForm()
             }
         }
-        .navigationTitle(Text(isEditMode == .active ? "Edit accounting" : "Detailed accounting content"))
+        .navigationTitle(Text(isEditMode == .active ? "Edit" : "Detail"))
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
-            Button {
-                if isEditMode.isEditing {
-                    // 將編輯後的資料更新回 CoreData 內
-                    moneyRecord.recordType = "\(selectedIndex)"
-                    moneyRecord.createdAt = selectedDate.toString()
-                    moneyRecord.updateTimestamp = Int64(selectedDate.timeIntervalSince1970)
-                    moneyRecord.itemName = "\(selectedCategory)"
-                    moneyRecord.itemPrice = inputPrice
-                    moneyRecord.notes = inputNotes
-                    
-                    if viewContext.hasChanges {
-                        do {
-                            try viewContext.save()
-                            print("更新記帳成功！")
-                        } catch {
-                            print("更新記帳失敗，Error：\(error.localizedDescription)")
-                        }
-                        dismiss()
-                    }
-                } else {
-                    switch isEditMode {
-                    case .inactive:
-                        self.isEditMode = .active
-                    case .active:
-                        self.isEditMode = .inactive
-                    default:
-                        break
-                    }
-                }
-            } label: {
-                Text(isEditMode.isEditing ? "Update" : "Edit")
-            }
+            buildEditButton()
         }
         .onAppear {
             selectedIndex = Int(moneyRecord.recordType)!
@@ -85,14 +53,46 @@ struct DetailMoneyRecordView: View {
             inputPrice = moneyRecord.itemPrice
             inputNotes = moneyRecord.notes
         }
-        .onTapGesture {
-            let keyWindow = UIApplication.shared.connectedScenes
-                .filter({$0.activationState == .foregroundActive})
-                .map({$0 as? UIWindowScene})
-                .compactMap({$0})
-                .first?.windows
-                .filter({$0.isKeyWindow}).first
-            keyWindow?.endEditing(true)
+        .closeKeyboard()
+    }
+}
+
+// MARK: - @ViewBuilder
+
+extension DetailMoneyRecordView {
+    
+    @ViewBuilder private func buildEditButton() -> some View {
+        Button {
+            if isEditMode.isEditing {
+                // 將編輯後的資料更新回 CoreData 內
+                moneyRecord.recordType = "\(selectedIndex)"
+                moneyRecord.createdAt = selectedDate.toString()
+                moneyRecord.updateTimestamp = Int64(selectedDate.timeIntervalSince1970)
+                moneyRecord.itemName = "\(selectedCategory)"
+                moneyRecord.itemPrice = inputPrice
+                moneyRecord.notes = inputNotes
+                
+                if viewContext.hasChanges {
+                    do {
+                        try viewContext.save()
+                        print("更新記帳成功！")
+                    } catch {
+                        print("更新記帳失敗，Error：\(error.localizedDescription)")
+                    }
+                    dismiss()
+                }
+            } else {
+                switch isEditMode {
+                case .inactive:
+                    self.isEditMode = .active
+                case .active:
+                    self.isEditMode = .inactive
+                default:
+                    break
+                }
+            }
+        } label: {
+            Text(isEditMode.isEditing ? "Update" : "Edit")
         }
     }
     

@@ -1,13 +1,12 @@
 //
 //  CategorySettingsList.swift
-//  
+//  Money
 //
 //  Created by Leo Ho on 2023/1/29.
 //
 
 import SwiftUI
 
-@available(iOS 16.0, *)
 struct CategorySettingsList: View {
     
     @AppStorage(.categorys) private var categorys: [String] = [
@@ -29,69 +28,82 @@ struct CategorySettingsList: View {
 
     var body: some View {
         VStack {
-            Form {
-                List {
-                    ForEach(categorys, id: \.self) { category in
-                        Text(category)
-                    }
-                    
-                    if isEditMode == .active {
-                        VStack {
-                            HStack {
-                                Label("New Category", sfSymbols: .menucard)
-                                TextField("", text: $newInputCategory, prompt: Text("Create New Category"))
-                                    .padding(.leading)
-                                    .focused($isFocused)
-                                    .onSubmit {
-                                        print(newInputCategory)
-                                        if !newInputCategory.isEmpty {
-                                            categorys.append(newInputCategory)
-                                            newInputCategory = ""
-                                        }
-                                    }
-                            }.padding(EdgeInsets(top: 5, leading: 0, bottom: 0, trailing: 0))
-                            
-                            Spacer(minLength: 5)
-                            
-                            Button(role: .cancel) {
-                                isEditMode = .inactive
-                                isFocused.toggle()
-                            } label: {
-                                Label("Cancel", sfSymbols: .xmark)
-                                    .padding()
-                                    .foregroundColor(.white)
-                                    .background(.red)
-                                    .cornerRadius(.infinity)
-                            }
-                            .padding()
-                        }
-                    }
-                }
-            }
+            buildCategoryView()
         }
         .navigationTitle("Accounting Category")
         .navigationBarTitleDisplayMode(.automatic)
         .toolbar {
-            Button {
-                if isEditMode.isEditing {
-                    if !newInputCategory.isEmpty {
-                        categorys.append(newInputCategory)
-                        newInputCategory = ""
-                    }
-                } else {
-                    switch isEditMode {
-                    case .inactive:
-                        self.isEditMode = .active
-                        isFocused.toggle()
-                    case .active:
-                        self.isEditMode = .inactive
-                    default:
-                        break
+            buildAddButton()
+        }
+    }
+}
+
+// MARK: - @ViewBuilder
+
+extension CategorySettingsList {
+    
+    @ViewBuilder private func buildCategoryView() -> some View {
+        Form {
+            List {
+                ForEach(categorys, id: \.self) { category in
+                    Text(category)
+                }
+                
+                if isEditMode == .active {
+                    VStack {
+                        HStack {
+                            Label("New Category", sfSymbols: .menucard)
+                            TextField("", text: $newInputCategory, prompt: Text("Create New Category"))
+                                .padding(.leading)
+                                .focused($isFocused)
+                                .onSubmit {
+                                    print(newInputCategory)
+                                    if !newInputCategory.isEmpty {
+                                        categorys.append(newInputCategory)
+                                        newInputCategory = ""
+                                    }
+                                }
+                        }.padding(EdgeInsets(top: 5, leading: 0, bottom: 0, trailing: 0))
+                        
+                        Spacer(minLength: 5)
+                        
+                        Button(role: .cancel) {
+                            isEditMode = .inactive
+                            isFocused.toggle()
+                        } label: {
+                            Label("Cancel", sfSymbols: .xmark)
+                                .padding()
+                                .foregroundColor(.white)
+                                .background(.red)
+                                .cornerRadius(.infinity)
+                        }
+                        .padding()
                     }
                 }
-            } label: {
-                Text(isEditMode.isEditing ? "Done" : "Add")
             }
+        }
+    }
+    
+    @ViewBuilder private func buildAddButton() -> some View {
+        Button {
+            if isEditMode.isEditing {
+                if !newInputCategory.isEmpty {
+                    categorys.append(newInputCategory)
+                    newInputCategory = ""
+                }
+            } else {
+                switch isEditMode {
+                case .inactive:
+                    self.isEditMode = .active
+                    isFocused.toggle()
+                case .active:
+                    self.isEditMode = .inactive
+                default:
+                    break
+                }
+            }
+        } label: {
+            Text(isEditMode.isEditing ? "Done" : "Add")
         }
     }
 }

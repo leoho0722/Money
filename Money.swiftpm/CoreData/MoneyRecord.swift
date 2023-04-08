@@ -1,6 +1,6 @@
 //
 //  MoneyRecord.swift
-//  
+//  Money
 //
 //  Created by Leo Ho on 2023/1/20.
 //

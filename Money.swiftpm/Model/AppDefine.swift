@@ -1,6 +1,6 @@
 //
 //  AppDefine.swift
-//  
+//  Money
 //
 //  Created by Leo Ho on 2023/1/20.
 //
@@ -128,11 +128,11 @@ struct AppDefine {
         var title: String {
             switch self {
             case .zh:
-                return "繁體／簡體中文"
+                return "Chinese"
             case .en:
                 return "English"
             case .ko:
-                return "한국어"
+                return "Korean"
             }
         }
         

@@ -1,6 +1,6 @@
 //
 //  HistoryChartView.swift
-//  
+//  Money
 //
 //  Created by Leo Ho on 2023/1/28.
 //
@@ -8,7 +8,6 @@
 import SwiftUI
 import Charts
 
-@available(iOS 16.0, *)
 struct HistoryChartView: View {
     
     @FetchRequest(
@@ -29,7 +28,7 @@ struct HistoryChartView: View {
         GeometryReader { proxy in
             NavigationStack {
                 List {
-                    Section("Revenue，Total revenue $\(vm.totalIncomePrice)") {
+                    Section("Income，Total income $\(vm.totalIncomePrice)") {
                         if vm.incomeData.count > 0 {
                             buildBarMark(data: vm.incomeData, proxy: proxy)
                         } else {
@@ -37,7 +36,7 @@ struct HistoryChartView: View {
                         }
                     }
                     
-                    Section("Expenditure，Total cost $\(vm.totalExpenditurePrice)") {
+                    Section("Expenditure，Total expenditure $\(vm.totalExpenditurePrice)") {
                         if vm.expenditureData.count > 0 {
                             buildBarMark(data: vm.expenditureData, proxy: proxy)
                         } else {
@@ -45,7 +44,7 @@ struct HistoryChartView: View {
                         }
                     }
                 }
-                .navigationTitle("Billing Charts")
+                .navigationTitle("Charts")
                 .navigationBarTitleDisplayMode(.inline)
                 .onAppear {
                     calcIncome()
@@ -56,9 +55,9 @@ struct HistoryChartView: View {
     }
 }
 
-// MARK: - HistoryChartView @ViewBuilder
+// MARK: - @ViewBuilder
 
-@available(iOS 16.0, *)
+
 extension HistoryChartView {
     
     /// 建構無記帳資料時，Chart 要顯示的畫面
@@ -66,7 +65,7 @@ extension HistoryChartView {
     ///   - type: AppDefine.RecordType，收入 or 支出
     @ViewBuilder private func buildNoDataView(type: AppDefine.RecordType) -> some View {
         VStack {
-            Label("Currently there is no \(type.title) billing information!", sfSymbols: .xmark)
+            Label("Currently there is no \(type.title.lowercased()) record!", sfSymbols: .xmark)
         }
     }
     
@@ -84,7 +83,7 @@ extension HistoryChartView {
                     )
                     .foregroundStyle(by: .value("Type", record.name))
                     .annotation {
-                        Text("\(record.price)")
+                        Text("$\(record.price)")
                     }
                 }
             }
@@ -102,15 +101,14 @@ extension HistoryChartView {
                     }
                 }
             }
-            .listStyle(.plain)
             .frame(minHeight: calcMinHeight(data: data, proxy: proxy))
+            .listStyle(.plain)
         }
     }
 }
 
-// MARK: - HistoryChartView calc Function
+// MARK: - calc Function
 
-@available(iOS 16.0, *)
 extension HistoryChartView {
     
     /// 計算／彙整收入資料

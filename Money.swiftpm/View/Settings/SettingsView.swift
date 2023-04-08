@@ -1,13 +1,12 @@
 //
 //  SettingsView.swift
-//  
+//  Money
 //
 //  Created by Leo Ho on 2023/1/25.
 //
 
 import SwiftUI
 
-@available(iOS 16.0, *)
 struct SettingsView: View {
     
     @FetchRequest(
@@ -15,24 +14,41 @@ struct SettingsView: View {
         sortDescriptors: []
     ) private var moneyRecords: FetchedResults<MoneyRecord>
     
+    @Environment(\.dismiss) private var dismiss
+    
     @AppStorage(.isUseDarkMode) private var isUseDarkMode: Bool = false
     
     @AppStorage(.tintColor) private var tintColor: Color = .accentColor
     
-    @State private var isPresentResetAlert: Bool = false
+    @State private var isPresentedAlert: Bool = false
+    @State private var isPresentedResetAllDataAlert: Bool = false
+    @State private var isPresentedResetAllUserSettingsAlert: Bool = false
+    @State private var isPresentedResetAllAlert: Bool = false
     
     var body: some View {
         NavigationStack {
-            Form {
-                Section("Appearance") {
-                    Toggle(isOn: $isUseDarkMode) {
-                        Label("Dark Mode", sfSymbols: .moon)
-                    }
-                    ColorPicker(selection: $tintColor) {
-                        Label("App Theme Color", sfSymbols: .paintpalette)
-                    }
+            buildSettingsView()
+                .navigationTitle("Settings")
+                .navigationBarTitleDisplayMode(.large)
+        }
+    }
+}
+
+// MARK: - @ViewBuilder
+
+extension SettingsView {
+    
+    @ViewBuilder private func buildSettingsView() -> some View {
+        Form {
+            Section("Appearance") {
+                Toggle(isOn: $isUseDarkMode) {
+                    Label("Dark Mode", sfSymbols: .moon)
                 }
-                
+                ColorPicker(selection: $tintColor) {
+                    Label("App Theme Color", sfSymbols: .paintpalette)
+                }
+            }
+            
 //                Section("Basic") {
 //                    NavigationLink {
 //                        CategorySettingsList()
@@ -40,29 +56,101 @@ struct SettingsView: View {
 //                        Label("Accounting Category", sfSymbols: .menucard)
 //                    }
 //                }
-                
-                Section("Advanced") {
-                    Button(role: .destructive) {
-                        isPresentResetAlert.toggle()
-                    } label: {
-                        Label("Reset All content and settings", sfSymbols: .trash)
-                            .foregroundColor(.red)
-                    }
-                    .confirmationDialog("Reset All content and settings", isPresented: $isPresentResetAlert) {
-                        Button("Confirm", role: .destructive) {
-                            UserDefaults.standard.resetAllSettings()
-                            
-                            PersistenceController.shared.deleteAllData(data: moneyRecords)
-                        }
-                        
-                        Button("Cancel", role: .cancel, action: {})
-                    } message: {
-                        Text("This operation will clear all content and settings in the app\nDo you want to proceed?")
-                    }
+            
+            Section("Advanced") {
+                Button(role: .destructive) {
+                    isPresentedAlert.toggle()
+                } label: {
+                    Label("Reset", sfSymbols: .trash)
+                        .foregroundColor(.red)
                 }
+                .confirmationDialog("Reset", isPresented: $isPresentedAlert) {
+                    Button("Reset All Data", role: .destructive) {
+                        isPresentedResetAllDataAlert.toggle()
+                    }
+                    Button("Reset All User Settings", role: .destructive) {
+                        isPresentedResetAllUserSettingsAlert.toggle()
+                    }
+                    Button("Reset All", role: .destructive) {
+                        isPresentedResetAllAlert.toggle()
+                    }
+                    
+                    Button("Cancel", role: .cancel, action: {})
+                } message: {
+                    Text("This operation cannot be undo.\n Do you want to continue?")
+                        .frame(alignment: .leading)
+                }
+                .modifier(ResetAllDataModifier(isPresented: $isPresentedResetAllDataAlert, data: moneyRecords))
+                .modifier(ResetAllUserSettingsModifier(isPresented: $isPresentedResetAllUserSettingsAlert))
+                .modifier(ResetAllModifier(isPresented: $isPresentedResetAllAlert, data: moneyRecords))
             }
-            .navigationTitle("Settings")
-            .navigationBarTitleDisplayMode(.large)
+        }
+    }
+}
+
+// MARK: -  ViewModifiers
+
+extension SettingsView {
+    
+    struct ResetAllDataModifier: ViewModifier {
+        
+        @Binding var isPresented: Bool
+        
+        let data: FetchedResults<MoneyRecord>
+        
+        func body(content: Content) -> some View {
+            content
+                .confirmationDialog("Reset All Data", isPresented: $isPresented) {
+                    Button("Confirm", role: .destructive) {
+                        PersistenceController.shared.deleteAllData(data: data)
+                    }
+                    
+                    Button("Cancel", role: .cancel, action: {})
+                } message: {
+                    Text("This operation will clear all data in the App.\n Do you want to continue?")
+                        .frame(alignment: .leading)
+                }
+        }
+    }
+    
+    struct ResetAllUserSettingsModifier: ViewModifier {
+        
+        @Binding var isPresented: Bool
+        
+        func body(content: Content) -> some View {
+            content
+                .confirmationDialog("Reset All User's Settings", isPresented: $isPresented) {
+                    Button("Confirm", role: .destructive) {
+                        UserDefaults.standard.resetAllSettings()
+                    }
+                    
+                    Button("Cancel", role: .cancel, action: {})
+                } message: {
+                    Text("This operation will clear all user's settings in the App.\n Do you want to continue?")
+                        .frame(alignment: .leading)
+                }
+        }
+    }
+    
+    struct ResetAllModifier: ViewModifier {
+        
+        @Binding var isPresented: Bool
+        
+        let data: FetchedResults<MoneyRecord>
+        
+        func body(content: Content) -> some View {
+            content
+                .confirmationDialog("Reset All Data", isPresented: $isPresented) {
+                    Button("Confirm", role: .destructive) {
+                        UserDefaults.standard.resetAllSettings()
+                        PersistenceController.shared.deleteAllData(data: data)
+                    }
+                    
+                    Button("Cancel", role: .cancel, action: {})
+                } message: {
+                    Text("This operation will clear all data and user's settings in the App.\n Do you want to continue?")
+                        .frame(alignment: .leading)
+                }
         }
     }
 }

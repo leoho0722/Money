@@ -1,6 +1,6 @@
 //
 //  Color+Extensions.swift
-//  
+//  Money
 //
 //  Created by Leo Ho on 2023/1/27.
 //
@@ -17,7 +17,8 @@ extension Color: RawRepresentable {
         }
         
         do {
-            let color = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? UIColor ?? .black
+            let color = try NSKeyedUnarchiver.unarchivedObject(ofClasses: [UIColor.self],
+                                                               from: data) as? UIColor ?? .black
             self = Color(color)
         } catch {
             self = .black

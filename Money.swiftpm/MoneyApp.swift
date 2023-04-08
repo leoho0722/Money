@@ -1,6 +1,12 @@
+//
+//  MoneyApp.swift
+//  Money
+//
+//  Created by Leo Ho on 2023/1/25.
+//
+
 import SwiftUI
 
-@available(iOS 16.0, *)
 @main
 struct MoneyApp: App {
     
