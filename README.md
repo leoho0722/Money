@@ -9,7 +9,7 @@ App Name：Money
 ## Development Environment
 
 - macOS Ventura 13.3
-- Xcode 14.1
+- Xcode 14.3
 - Support iOS、iPadOS、macOS system
 - Use Swift Playgrounds App + SwiftUI to develop
 - Use CoreData to save Data
