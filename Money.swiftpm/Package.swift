@@ -17,6 +17,7 @@ let package = Package(
             name: "Money",
             targets: ["AppModule"],
             bundleIdentifier: "com.leoho.Money",
+            teamIdentifier: "23JEQ2524P",
             displayVersion: "1.0",
             bundleVersion: "1",
             appIcon: .placeholder(icon: .cloud),
@@ -30,6 +31,9 @@ let package = Package(
                 .landscapeRight,
                 .landscapeLeft,
                 .portraitUpsideDown(.when(deviceFamilies: [.pad]))
+            ],
+            capabilities: [
+                .faceID(purposeString: "Use biometric authentication to unlock App")
             ]
         )
     ],

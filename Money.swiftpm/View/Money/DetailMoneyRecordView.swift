@@ -99,19 +99,19 @@ extension DetailMoneyRecordView {
     /// 建構一般模式下的表單
     @ViewBuilder private func buildNormalForm() -> some View {
         Form {
-            Label("Type：\(AppDefine.RecordType.allCases[selectedIndex].title)", sfSymbols: .money)
+            Label("Type：\(AppDefine.RecordType.allCases[selectedIndex].title)", icon: .money)
                 .padding(5)
             
-            Label("Date：\(moneyRecord.createdAt)", sfSymbols: .calender)
+            Label("Date：\(moneyRecord.createdAt)", icon: .calender)
                 .padding(5)
             
-            Label("Category：\(AppDefine.Category.allCases[selectedCategory].title)", sfSymbols: .menucard)
+            Label("Category：\(AppDefine.Category.allCases[selectedCategory].title)", icon: .menucard)
                 .padding(5)
             
-            Label("Price：\(inputPrice)", sfSymbols: .money)
+            Label("Price：\(inputPrice)", icon: .money)
                 .padding(5)
             
-            Label("Notes：\(inputNotes)", sfSymbols: .notes)
+            Label("Notes：\(inputNotes)", icon: .notes)
                 .padding(5)
         }
     }
@@ -124,7 +124,7 @@ extension DetailMoneyRecordView {
                     Text(recordType.title).tag(recordType.rawValue)
                 }
             } label: {
-                Label("Type", sfSymbols: .money)
+                Label("Type", icon: .money)
             }
             .pickerStyle(.menu)
             .onChange(of: selectedIndex) { newValue in
@@ -133,7 +133,7 @@ extension DetailMoneyRecordView {
             
             DatePicker(selection: $selectedDate,
                        in: ...Date(),
-                       displayedComponents: .date) { Label("Date", sfSymbols: .calender) }
+                       displayedComponents: .date) { Label("Date", icon: .calender) }
                 .environment(\.locale, Locale.preferredLocale)
                 .onChange(of: selectedDate) { newValue in
                     selectedDate = newValue
@@ -144,7 +144,7 @@ extension DetailMoneyRecordView {
                     Text(category.title).tag(category.rawValue)
                 }
             } label: {
-                Label("Category", sfSymbols: .menucard)
+                Label("Category", icon: .menucard)
             }
             .pickerStyle(.menu)
             .onChange(of: selectedCategory) { newValue in
@@ -152,7 +152,7 @@ extension DetailMoneyRecordView {
             }
             
             HStack {
-                Label("Price", sfSymbols: .money)
+                Label("Price", icon: .money)
                 TextField("", text: $inputPrice, prompt: Text("Input Price"))
                     .padding(.leading)
                     .keyboardType(.numberPad)
@@ -162,7 +162,7 @@ extension DetailMoneyRecordView {
             }
             
             VStack(alignment: .leading) {
-                Label("Note...", sfSymbols: .notes)
+                Label("Note...", icon: .notes)
                     .padding(EdgeInsets(top: 5, leading: 0, bottom: 0, trailing: 0))
                 TextEditor(text: $inputNotes)
                     .frame(minHeight: 200)

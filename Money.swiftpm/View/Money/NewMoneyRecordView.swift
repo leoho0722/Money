@@ -60,7 +60,7 @@ extension NewMoneyRecordView {
                 Text(recordType.title).tag(recordType.rawValue)
             }
         } label: {
-            Label("Type", sfSymbols: .money)
+            Label("Type", icon: .money)
         }
         .pickerStyle(.menu)
         .onChange(of: selectedIndex) { newValue in
@@ -71,7 +71,7 @@ extension NewMoneyRecordView {
     @ViewBuilder private func buildDatePicker() -> some View {
         DatePicker(selection: $selectedDate,
                    in: ...Date(),
-                   displayedComponents: .date) { Label("Date", sfSymbols: .calender) }
+                   displayedComponents: .date) { Label("Date", icon: .calender) }
             .environment(\.locale, Locale.preferredLocale)
             .onChange(of: selectedDate) { newValue in
                 selectedDate = newValue
@@ -84,7 +84,7 @@ extension NewMoneyRecordView {
                 Text(category.title).tag(category.rawValue)
             }
         } label: {
-            Label("Category", sfSymbols: .menucard)
+            Label("Category", icon: .menucard)
         }
         .pickerStyle(.menu)
         .onChange(of: selectedCategory) { newValue in
@@ -94,7 +94,7 @@ extension NewMoneyRecordView {
     
     @ViewBuilder private func buildPrice() -> some View {
         HStack {
-            Label("Price", sfSymbols: .money)
+            Label("Price", icon: .money)
             TextField("", text: $inputPrice, prompt: Text("Input price"))
                 .padding(.leading)
                 .keyboardType(.numberPad)
@@ -103,7 +103,7 @@ extension NewMoneyRecordView {
     
     @ViewBuilder private func buildNotes() -> some View {
         VStack(alignment: .leading) {
-            Label("Note...", sfSymbols: .notes)
+            Label("Note...", icon: .notes)
                 .padding(EdgeInsets(top: 5, leading: 0, bottom: 0, trailing: 0))
             TextEditor(text: $inputNotes)
                 .frame(minHeight: 200)

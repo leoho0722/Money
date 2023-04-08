@@ -16,7 +16,11 @@ struct SettingsView: View {
     
     @Environment(\.dismiss) private var dismiss
     
+    @EnvironmentObject private var laVM: LocalAuthenticationViewModel
+    
     @AppStorage(.isUseDarkMode) private var isUseDarkMode: Bool = false
+    
+    @AppStorage(.isUseLocalAuthentication) private var isUseLocalAuthentication: Bool = false
     
     @AppStorage(.tintColor) private var tintColor: Color = .accentColor
     
@@ -30,6 +34,9 @@ struct SettingsView: View {
             buildSettingsView()
                 .navigationTitle("Settings")
                 .navigationBarTitleDisplayMode(.large)
+        }.onAppear {
+            laVM.getBiometryType()
+            print("Device Support Biometry Type：",laVM.deviceSupportBiometryType.rawValue)
         }
     }
 }
@@ -42,10 +49,10 @@ extension SettingsView {
         Form {
             Section("Appearance") {
                 Toggle(isOn: $isUseDarkMode) {
-                    Label("Dark Mode", sfSymbols: .moon)
+                    Label("Dark Mode", icon: .moon)
                 }
                 ColorPicker(selection: $tintColor) {
-                    Label("App Theme Color", sfSymbols: .paintpalette)
+                    Label("Theme Color", icon: .paintpalette)
                 }
             }
             
@@ -57,11 +64,28 @@ extension SettingsView {
 //                    }
 //                }
             
+            if laVM.deviceSupportBiometryType != .none {
+                Section("Authentication") {
+                    Toggle(isOn: $isUseLocalAuthentication) {
+                        Label("Biometric Authentication", icon: (laVM.deviceSupportBiometryType == .faceID) ? .faceid : .touchid)
+                    }
+                    .onChange(of: isUseLocalAuthentication) { newValue in
+                        print(newValue)
+                        let reason = newValue ? "Enable" : "Disable"
+                        if newValue {
+                            Task {
+                                await laVM.authenicate(reason: "\(reason) Biometric Authentication")
+                            }
+                        }
+                    }
+                }
+            }
+            
             Section("Advanced") {
                 Button(role: .destructive) {
                     isPresentedAlert.toggle()
                 } label: {
-                    Label("Reset", sfSymbols: .trash)
+                    Label("Reset", icon: .trash)
                         .foregroundColor(.red)
                 }
                 .confirmationDialog("Reset", isPresented: $isPresentedAlert) {

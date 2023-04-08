@@ -19,6 +19,9 @@ extension UserDefaults {
         
         /// User-defined billing categories
         case categorys
+        
+        /// Whether use Touch ID / Face ID to unlock App
+        case isUseLocalAuthentication
     }
     
     /// Reset all settings in UserDefaults

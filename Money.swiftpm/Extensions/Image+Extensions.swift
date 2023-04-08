@@ -9,7 +9,7 @@ import SwiftUI
 
 extension Image {
     
-    init(sfSymbols: AppDefine.SFSymbols) {
-        self.init(systemName: sfSymbols.rawValue)
+    init(icon: SFSymbols) {
+        self.init(systemName: icon.rawValue)
     }
 }

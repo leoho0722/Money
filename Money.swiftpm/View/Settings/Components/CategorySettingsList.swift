@@ -52,7 +52,7 @@ extension CategorySettingsList {
                 if isEditMode == .active {
                     VStack {
                         HStack {
-                            Label("New Category", sfSymbols: .menucard)
+                            Label("New Category", icon: .menucard)
                             TextField("", text: $newInputCategory, prompt: Text("Create New Category"))
                                 .padding(.leading)
                                 .focused($isFocused)
@@ -71,7 +71,7 @@ extension CategorySettingsList {
                             isEditMode = .inactive
                             isFocused.toggle()
                         } label: {
-                            Label("Cancel", sfSymbols: .xmark)
+                            Label("Cancel", icon: .xmark)
                                 .padding()
                                 .foregroundColor(.white)
                                 .background(.red)

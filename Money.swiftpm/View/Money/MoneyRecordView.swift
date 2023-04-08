@@ -42,7 +42,7 @@ struct MoneyRecordView: View {
                         // 點了要跳出 bottomSheet
                         isPresentBottomSheet.toggle()
                     } label: {
-                        Image(sfSymbols: .plus)
+                        Image(icon: .plus)
                             .resizable(resizingMode: .tile)
                     }
                 }
@@ -85,7 +85,7 @@ extension MoneyRecordView {
     /// 建構無記帳資料的畫面
     @ViewBuilder private func buildNoRecordView() -> some View {
         VStack {
-            Label("There is no record yet!", sfSymbols: .money)
+            Label("There is no record yet!", icon: .money)
                 .padding()
         }
     }

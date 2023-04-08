@@ -65,7 +65,7 @@ extension HistoryChartView {
     ///   - type: AppDefine.RecordType，收入 or 支出
     @ViewBuilder private func buildNoDataView(type: AppDefine.RecordType) -> some View {
         VStack {
-            Label("Currently there is no \(type.title.lowercased()) record!", sfSymbols: .xmark)
+            Label("Currently there is no \(type.title.lowercased()) record!", icon: .xmark)
         }
     }
     
@@ -95,7 +95,7 @@ extension HistoryChartView {
             List {
                 ForEach(data) { record in
                     HStack {
-                        Label("\(record.name)", sfSymbols: .menucard)
+                        Label("\(record.name)", icon: .menucard)
                         Spacer()
                         Text("$\(record.price)")
                     }

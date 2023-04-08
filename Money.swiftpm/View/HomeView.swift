@@ -11,20 +11,27 @@ struct HomeView: View {
     
     @AppStorage(.isUseDarkMode) private var isUseDarkMode: Bool = false
     
+    @EnvironmentObject private var laVM: LocalAuthenticationViewModel
+    
     var body: some View {
         TabView {
             MoneyRecordView()
                 .tabItem {
-                    Label("Records", sfSymbols: .money)
+                    Label("Records", icon: .money)
                 }
             HistoryChartView()
                 .tabItem {
-                    Label("Charts", sfSymbols: .chart)
+                    Label("Charts", icon: .chart)
                 }
             SettingsView()
                 .tabItem {
-                    Label("Settings", sfSymbols: .settings)
+                    Label("Settings", icon: .settings)
                 }
-        }.preferredColorScheme(isUseDarkMode ? .dark : .light)
+                .environmentObject(laVM)
+        }
+        #if targetEnvironment(macCatalyst)
+        .frame(minWidth: 500, minHeight: 300)
+        #endif
+        .preferredColorScheme(isUseDarkMode ? .dark : .light)
     }
 }
