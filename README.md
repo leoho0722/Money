@@ -1,4 +1,4 @@
-# Money with Swift Playgrounds App
+# Money
 
 ## Description
 
