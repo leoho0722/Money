@@ -1,10 +1,11 @@
 # Money
 
-## Description
-
 Side Project - 記帳 App
 
-App Name：Money
+## App Description
+
+- Name：Money
+- Minimum system requirements：iOS 16.0
 
 ## Development Environment
 
@@ -12,6 +13,6 @@ App Name：Money
 - Xcode 15.0 beta 1
 - Support iOS、iPadOS、macOS system
 - Use SwiftUI to develop
-- Use CoreData Framework to save Data
-- Use Swift Charts Framework to draw Charts
-- Use Local Authentication Framework to unlock App
+- Use CoreData to save Data
+- Use Swift Charts to draw Charts
+- Use Local Authentication Framework to unlock App (only available physical devices)
