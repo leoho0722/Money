@@ -16,4 +16,4 @@ Side Project - 記帳 App
 - Use MVVM Design Pattern
 - Use CoreData to save Data
 - Use Swift Charts to draw Charts
-- Use Local Authentication Framework to unlock App (only available physical devices)
+- Use Local Authentication to unlock App (only available physical devices)
