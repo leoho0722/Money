@@ -4,11 +4,14 @@
 
 Side Project - 記帳 App
 
+App Name：Money
+
 ## Development Environment
 
-- macOS Ventura 13.3
-- Xcode 14.1
-- 支援 iOS 系統
-- 使用 SwiftUI 開發
-- 使用 RealmSwift 儲存資料
-- 使用 Swift Charts 繪製圖表
+- macOS Ventura 13.4
+- Xcode 15.0 beta 1
+- Support iOS、iPadOS、macOS system
+- Use SwiftUI to develop
+- Use CoreData Framework to save Data
+- Use Swift Charts Framework to draw Charts
+- Use Local Authentication Framework to unlock App
