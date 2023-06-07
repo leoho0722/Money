@@ -13,6 +13,7 @@ Side Project - 記帳 App
 - Xcode 15.0 beta 1
 - Support iOS、iPadOS、macOS system
 - Use SwiftUI to develop
+- Use MVVM Design Pattern
 - Use CoreData to save Data
 - Use Swift Charts to draw Charts
 - Use Local Authentication Framework to unlock App (only available physical devices)
